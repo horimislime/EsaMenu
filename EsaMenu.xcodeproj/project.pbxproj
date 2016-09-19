@@ -1,0 +1,570 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F3ED2EA0FA516DAD6A372D0 /* Pods_EsaMenuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5030AFF3F371F30AC408F819 /* Pods_EsaMenuTests.framework */; };
+		139A15CA1D8E8B2A0074623F /* EsaEntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A15C81D8E8B2A0074623F /* EsaEntriesViewController.swift */; };
+		139A15CB1D8E8B2A0074623F /* EsaEntriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 139A15C91D8E8B2A0074623F /* EsaEntriesViewController.xib */; };
+		13EE26321D8ED8CA00D7A8B0 /* EsaEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EE26311D8ED8CA00D7A8B0 /* EsaEntryCell.swift */; };
+		13EE26341D8EDD6C00D7A8B0 /* EsaEntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13EE26331D8EDD6C00D7A8B0 /* EsaEntryCell.xib */; };
+		13EE26361D8EEB0C00D7A8B0 /* Esa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EE26351D8EEB0C00D7A8B0 /* Esa.swift */; };
+		13EE26381D8EEBC000D7A8B0 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EE26371D8EEBC000D7A8B0 /* Entry.swift */; };
+		13EE263A1D8EEBDC00D7A8B0 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EE26391D8EEBDC00D7A8B0 /* Configuration.swift */; };
+		13EE263C1D8EF51500D7A8B0 /* CustomDateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EE263B1D8EF51500D7A8B0 /* CustomDateTransform.swift */; };
+		13EE263E1D8F7BAA00D7A8B0 /* NSColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EE263D1D8F7BAA00D7A8B0 /* NSColorExtension.swift */; };
+		13EE26401D8FB05900D7A8B0 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EE263F1D8FB05900D7A8B0 /* EventMonitor.swift */; };
+		13FB32F21D8E8026008725B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FB32F11D8E8026008725B1 /* AppDelegate.swift */; };
+		13FB32F41D8E8026008725B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13FB32F31D8E8026008725B1 /* Assets.xcassets */; };
+		13FB32F71D8E8026008725B1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13FB32F51D8E8026008725B1 /* MainMenu.xib */; };
+		13FB33021D8E8026008725B1 /* EsaMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FB33011D8E8026008725B1 /* EsaMenuTests.swift */; };
+		904C46688A8E7920B5426EB9 /* Pods_EsaMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F47D873F2F8AF239489391 /* Pods_EsaMenu.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		13FB32FE1D8E8026008725B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13FB32E61D8E8026008725B1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13FB32ED1D8E8026008725B1;
+			remoteInfo = EsaMenu;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		139A15C81D8E8B2A0074623F /* EsaEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsaEntriesViewController.swift; sourceTree = "<group>"; };
+		139A15C91D8E8B2A0074623F /* EsaEntriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntriesViewController.xib; sourceTree = "<group>"; };
+		13EE26311D8ED8CA00D7A8B0 /* EsaEntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsaEntryCell.swift; sourceTree = "<group>"; };
+		13EE26331D8EDD6C00D7A8B0 /* EsaEntryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntryCell.xib; sourceTree = "<group>"; };
+		13EE26351D8EEB0C00D7A8B0 /* Esa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Esa.swift; sourceTree = "<group>"; };
+		13EE26371D8EEBC000D7A8B0 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		13EE26391D8EEBDC00D7A8B0 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		13EE263B1D8EF51500D7A8B0 /* CustomDateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDateTransform.swift; sourceTree = "<group>"; };
+		13EE263D1D8F7BAA00D7A8B0 /* NSColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSColorExtension.swift; sourceTree = "<group>"; };
+		13EE263F1D8FB05900D7A8B0 /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		13FB32EE1D8E8026008725B1 /* EsaMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsaMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13FB32F11D8E8026008725B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		13FB32F31D8E8026008725B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		13FB32F61D8E8026008725B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		13FB32F81D8E8026008725B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13FB32FD1D8E8026008725B1 /* EsaMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EsaMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		13FB33011D8E8026008725B1 /* EsaMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsaMenuTests.swift; sourceTree = "<group>"; };
+		13FB33031D8E8026008725B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24F47D873F2F8AF239489391 /* Pods_EsaMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsaMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5030AFF3F371F30AC408F819 /* Pods_EsaMenuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsaMenuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FC350A4FE44312C4190D66C /* Pods-EsaMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsaMenu.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsaMenu/Pods-EsaMenu.release.xcconfig"; sourceTree = "<group>"; };
+		975EC0DE146F17063A5C6613 /* Pods-EsaMenuTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsaMenuTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsaMenuTests/Pods-EsaMenuTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B2ABC5A9DAF87A5D59689444 /* Pods-EsaMenuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsaMenuTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsaMenuTests/Pods-EsaMenuTests.release.xcconfig"; sourceTree = "<group>"; };
+		DAAB93F5F9A99251071AAE21 /* Pods-EsaMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsaMenu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsaMenu/Pods-EsaMenu.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		13FB32EB1D8E8026008725B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				904C46688A8E7920B5426EB9 /* Pods_EsaMenu.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13FB32FA1D8E8026008725B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F3ED2EA0FA516DAD6A372D0 /* Pods_EsaMenuTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		13FB32E51D8E8026008725B1 = {
+			isa = PBXGroup;
+			children = (
+				13FB32F01D8E8026008725B1 /* EsaMenu */,
+				13FB33001D8E8026008725B1 /* EsaMenuTests */,
+				13FB32EF1D8E8026008725B1 /* Products */,
+				1DAFC61F2D9E66BA5FAA0801 /* Pods */,
+				6D788EFF8969AA21FABA5295 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		13FB32EF1D8E8026008725B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13FB32EE1D8E8026008725B1 /* EsaMenu.app */,
+				13FB32FD1D8E8026008725B1 /* EsaMenuTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		13FB32F01D8E8026008725B1 /* EsaMenu */ = {
+			isa = PBXGroup;
+			children = (
+				13FB32F11D8E8026008725B1 /* AppDelegate.swift */,
+				13FB32F31D8E8026008725B1 /* Assets.xcassets */,
+				13FB32F51D8E8026008725B1 /* MainMenu.xib */,
+				13FB32F81D8E8026008725B1 /* Info.plist */,
+				139A15C81D8E8B2A0074623F /* EsaEntriesViewController.swift */,
+				139A15C91D8E8B2A0074623F /* EsaEntriesViewController.xib */,
+				13EE26311D8ED8CA00D7A8B0 /* EsaEntryCell.swift */,
+				13EE26331D8EDD6C00D7A8B0 /* EsaEntryCell.xib */,
+				13EE26351D8EEB0C00D7A8B0 /* Esa.swift */,
+				13EE26371D8EEBC000D7A8B0 /* Entry.swift */,
+				13EE26391D8EEBDC00D7A8B0 /* Configuration.swift */,
+				13EE263B1D8EF51500D7A8B0 /* CustomDateTransform.swift */,
+				13EE263D1D8F7BAA00D7A8B0 /* NSColorExtension.swift */,
+				13EE263F1D8FB05900D7A8B0 /* EventMonitor.swift */,
+			);
+			path = EsaMenu;
+			sourceTree = "<group>";
+		};
+		13FB33001D8E8026008725B1 /* EsaMenuTests */ = {
+			isa = PBXGroup;
+			children = (
+				13FB33011D8E8026008725B1 /* EsaMenuTests.swift */,
+				13FB33031D8E8026008725B1 /* Info.plist */,
+			);
+			path = EsaMenuTests;
+			sourceTree = "<group>";
+		};
+		1DAFC61F2D9E66BA5FAA0801 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DAAB93F5F9A99251071AAE21 /* Pods-EsaMenu.debug.xcconfig */,
+				5FC350A4FE44312C4190D66C /* Pods-EsaMenu.release.xcconfig */,
+				975EC0DE146F17063A5C6613 /* Pods-EsaMenuTests.debug.xcconfig */,
+				B2ABC5A9DAF87A5D59689444 /* Pods-EsaMenuTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6D788EFF8969AA21FABA5295 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24F47D873F2F8AF239489391 /* Pods_EsaMenu.framework */,
+				5030AFF3F371F30AC408F819 /* Pods_EsaMenuTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		13FB32ED1D8E8026008725B1 /* EsaMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13FB33061D8E8026008725B1 /* Build configuration list for PBXNativeTarget "EsaMenu" */;
+			buildPhases = (
+				678715EAE84DC0FBEC1ED04A /* [CP] Check Pods Manifest.lock */,
+				13FB32EA1D8E8026008725B1 /* Sources */,
+				13FB32EB1D8E8026008725B1 /* Frameworks */,
+				13FB32EC1D8E8026008725B1 /* Resources */,
+				21E9FBEA9529AB1A45381411 /* [CP] Embed Pods Frameworks */,
+				76492DDCFC623F63C73B62F9 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EsaMenu;
+			productName = EsaMenu;
+			productReference = 13FB32EE1D8E8026008725B1 /* EsaMenu.app */;
+			productType = "com.apple.product-type.application";
+		};
+		13FB32FC1D8E8026008725B1 /* EsaMenuTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13FB33091D8E8026008725B1 /* Build configuration list for PBXNativeTarget "EsaMenuTests" */;
+			buildPhases = (
+				9CB0BBE0EC5D0394DA3CABED /* [CP] Check Pods Manifest.lock */,
+				13FB32F91D8E8026008725B1 /* Sources */,
+				13FB32FA1D8E8026008725B1 /* Frameworks */,
+				13FB32FB1D8E8026008725B1 /* Resources */,
+				F135F42C9C9119C66E90E1F8 /* [CP] Embed Pods Frameworks */,
+				8A4987598F05C37C80BAAFD2 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				13FB32FF1D8E8026008725B1 /* PBXTargetDependency */,
+			);
+			name = EsaMenuTests;
+			productName = EsaMenuTests;
+			productReference = 13FB32FD1D8E8026008725B1 /* EsaMenuTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		13FB32E61D8E8026008725B1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = horimislime;
+				TargetAttributes = {
+					13FB32ED1D8E8026008725B1 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = KZ3W9FX44T;
+					};
+					13FB32FC1D8E8026008725B1 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 13FB32ED1D8E8026008725B1;
+					};
+				};
+			};
+			buildConfigurationList = 13FB32E91D8E8026008725B1 /* Build configuration list for PBXProject "EsaMenu" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 13FB32E51D8E8026008725B1;
+			productRefGroup = 13FB32EF1D8E8026008725B1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				13FB32ED1D8E8026008725B1 /* EsaMenu */,
+				13FB32FC1D8E8026008725B1 /* EsaMenuTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		13FB32EC1D8E8026008725B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13EE26341D8EDD6C00D7A8B0 /* EsaEntryCell.xib in Resources */,
+				13FB32F41D8E8026008725B1 /* Assets.xcassets in Resources */,
+				13FB32F71D8E8026008725B1 /* MainMenu.xib in Resources */,
+				139A15CB1D8E8B2A0074623F /* EsaEntriesViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13FB32FB1D8E8026008725B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		21E9FBEA9529AB1A45381411 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsaMenu/Pods-EsaMenu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		678715EAE84DC0FBEC1ED04A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		76492DDCFC623F63C73B62F9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsaMenu/Pods-EsaMenu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8A4987598F05C37C80BAAFD2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsaMenuTests/Pods-EsaMenuTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CB0BBE0EC5D0394DA3CABED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F135F42C9C9119C66E90E1F8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EsaMenuTests/Pods-EsaMenuTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		13FB32EA1D8E8026008725B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13EE263A1D8EEBDC00D7A8B0 /* Configuration.swift in Sources */,
+				13EE26381D8EEBC000D7A8B0 /* Entry.swift in Sources */,
+				13EE26321D8ED8CA00D7A8B0 /* EsaEntryCell.swift in Sources */,
+				13EE263C1D8EF51500D7A8B0 /* CustomDateTransform.swift in Sources */,
+				13EE26361D8EEB0C00D7A8B0 /* Esa.swift in Sources */,
+				13FB32F21D8E8026008725B1 /* AppDelegate.swift in Sources */,
+				13EE26401D8FB05900D7A8B0 /* EventMonitor.swift in Sources */,
+				13EE263E1D8F7BAA00D7A8B0 /* NSColorExtension.swift in Sources */,
+				139A15CA1D8E8B2A0074623F /* EsaEntriesViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13FB32F91D8E8026008725B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13FB33021D8E8026008725B1 /* EsaMenuTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		13FB32FF1D8E8026008725B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13FB32ED1D8E8026008725B1 /* EsaMenu */;
+			targetProxy = 13FB32FE1D8E8026008725B1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		13FB32F51D8E8026008725B1 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				13FB32F61D8E8026008725B1 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		13FB33041D8E8026008725B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		13FB33051D8E8026008725B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		13FB33071D8E8026008725B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAAB93F5F9A99251071AAE21 /* Pods-EsaMenu.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hitoshi Nakamura (LZ6MRY38JF)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EsaMenu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu.EsaMenu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		13FB33081D8E8026008725B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FC350A4FE44312C4190D66C /* Pods-EsaMenu.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hitoshi Nakamura (LZ6MRY38JF)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EsaMenu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu.EsaMenu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		13FB330A1D8E8026008725B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 975EC0DE146F17063A5C6613 /* Pods-EsaMenuTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EsaMenuTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu.EsaMenuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EsaMenu.app/Contents/MacOS/EsaMenu";
+			};
+			name = Debug;
+		};
+		13FB330B1D8E8026008725B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2ABC5A9DAF87A5D59689444 /* Pods-EsaMenuTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EsaMenuTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu.EsaMenuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EsaMenu.app/Contents/MacOS/EsaMenu";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		13FB32E91D8E8026008725B1 /* Build configuration list for PBXProject "EsaMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13FB33041D8E8026008725B1 /* Debug */,
+				13FB33051D8E8026008725B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		13FB33061D8E8026008725B1 /* Build configuration list for PBXNativeTarget "EsaMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13FB33071D8E8026008725B1 /* Debug */,
+				13FB33081D8E8026008725B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		13FB33091D8E8026008725B1 /* Build configuration list for PBXNativeTarget "EsaMenuTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13FB330A1D8E8026008725B1 /* Debug */,
+				13FB330B1D8E8026008725B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 13FB32E61D8E8026008725B1 /* Project object */;
+}

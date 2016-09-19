@@ -1,0 +1,85 @@
+//
+//  Entry.swift
+//  EsaMenu
+//
+//  Created by horimislime on 9/19/16.
+//  Copyright © 2016 horimislime. All rights reserved.
+//
+
+import Alamofire
+import AlamofireObjectMapper
+import ObjectMapper
+
+class EntryAuthor: Mappable {
+    
+    var name: String!
+    var screenName: String!
+    var iconUrlString: String!
+    
+    var iconURL: NSURL {
+        return NSURL(string: iconUrlString)!
+    }
+    
+    required convenience init?(_ map: Map) {
+        self.init()
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        name <- map["name"]
+        screenName <- map["screen_name"]
+        iconUrlString <- map["icon"]
+    }
+}
+
+class Entry : Mappable {
+    
+    var name: String!
+    var markdown: String?
+    var tags: [String]?
+    var category: String?
+    var wip = true
+    var message: String?
+    var url: String?
+    
+    var createdAt: NSDate!
+    var updatedAt: NSDate!
+    
+    var updatedBy: EntryAuthor!
+    
+    
+    required convenience init?(_ map: Map) {
+        self.init()
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        name <- map["name"]
+        markdown <- map["body_md"]
+        category <- map["category"]
+        wip <- map["wip"]
+        url <- map["url"]
+        
+        createdAt <- (map["created_at"], CustomDateTransform())
+        updatedAt <- (map["updated_at"], CustomDateTransform())
+        updatedBy <- map["updated_by"]
+    }
+    
+    class func list(completion: Result<[Entry], NSError> -> Void) {
+        Alamofire.request(Router.Posts(Configuration.load()))
+            .validate()
+            .responseArray("posts") { (response: [Entry]?, error: ErrorType?) in
+                
+                if let model = response {
+                    completion(.Success(model))
+                    return
+                }
+                
+                completion(.Failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+        }
+    }
+}
+
+
+
+
