@@ -10,6 +10,7 @@ import Cocoa
 
 enum ColorType: Int {
     case darkGray = 0x9D9D9D
+    case lightGray = 0xE7E9E9
     case esaGreen = 0x0a9b94
     case black = 0x000000
 }

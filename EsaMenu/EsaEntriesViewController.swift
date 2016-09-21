@@ -20,7 +20,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         tableView.registerNib(NSNib(nibNamed: "EsaEntryCell", bundle: nil), forIdentifier: "EsaEntryCellIdentifier")
         tableView.setDelegate(self)
         tableView.setDataSource(self)
-//        tableView.
+        
         
         Entry.list() { [weak self] result in
             guard let strongSelf = self else { return }
@@ -37,7 +37,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     }
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        tableView.gridColor = (entries.count == 0) ? NSColor.clearColor() : NSColor(type: .darkGray)
+        tableView.gridColor = (entries.count == 0) ? NSColor.clearColor() : NSColor(type: .lightGray)
         return entries.count
     }
     
