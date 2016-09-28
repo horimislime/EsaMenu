@@ -12,25 +12,36 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
 
     @IBOutlet weak var tableView: NSTableView!
     
-    private var entries = [Entry]()
+    private var entries = FetchedEntries()
+    private weak var timer: NSTimer?
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         tableView.registerNib(NSNib(nibNamed: "EsaEntryCell", bundle: nil), forIdentifier: "EsaEntryCellIdentifier")
         tableView.setDelegate(self)
         tableView.setDataSource(self)
         
-        
+        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(updatePosts(_:)), userInfo: nil, repeats: true)
+        timer?.fire()
+    }
+    
+    deinit {
+        timer?.invalidate()
+    }
+    
+    func updatePosts(timer: NSTimer) {
+        print("timer fired")
         Entry.list() { [weak self] result in
             guard let strongSelf = self else { return }
             switch result {
             case .Success(let entries):
                 print("success")
-                strongSelf.entries = entries
+                strongSelf.entries.push(entries)
                 strongSelf.tableView.reloadData()
                 
-            case .Failure(let error):
+            case .Failure(_):
                 print("error")
             }
         }
@@ -47,7 +58,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeViewWithIdentifier("EsaEntryCellIdentifier", owner: self) as! EsaEntryCell
-        cell.configure(entries[row])
+        cell.configure(entries.sorted()[row])
         return cell
     }
     

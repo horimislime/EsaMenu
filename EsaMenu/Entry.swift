@@ -34,6 +34,7 @@ class EntryAuthor: Mappable {
 
 class Entry : Mappable {
     
+    var number: Int!
     var name: String!
     var markdown: String?
     var tags: [String]?
@@ -54,6 +55,7 @@ class Entry : Mappable {
     }
     
     func mapping(map: Map) {
+        number <- map["number"]
         name <- map["name"]
         markdown <- map["body_md"]
         category <- map["category"]

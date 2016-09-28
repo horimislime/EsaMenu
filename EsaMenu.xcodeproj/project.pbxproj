@@ -10,6 +10,7 @@
 		0F3ED2EA0FA516DAD6A372D0 /* Pods_EsaMenuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5030AFF3F371F30AC408F819 /* Pods_EsaMenuTests.framework */; };
 		139A15CA1D8E8B2A0074623F /* EsaEntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A15C81D8E8B2A0074623F /* EsaEntriesViewController.swift */; };
 		139A15CB1D8E8B2A0074623F /* EsaEntriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 139A15C91D8E8B2A0074623F /* EsaEntriesViewController.xib */; };
+		13EAF7E71D9BDFC400AB86CE /* FetchedEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EAF7E61D9BDFC400AB86CE /* FetchedEntries.swift */; };
 		13EE26321D8ED8CA00D7A8B0 /* EsaEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EE26311D8ED8CA00D7A8B0 /* EsaEntryCell.swift */; };
 		13EE26341D8EDD6C00D7A8B0 /* EsaEntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13EE26331D8EDD6C00D7A8B0 /* EsaEntryCell.xib */; };
 		13EE26361D8EEB0C00D7A8B0 /* Esa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EE26351D8EEB0C00D7A8B0 /* Esa.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		139A15C81D8E8B2A0074623F /* EsaEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsaEntriesViewController.swift; sourceTree = "<group>"; };
 		139A15C91D8E8B2A0074623F /* EsaEntriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntriesViewController.xib; sourceTree = "<group>"; };
+		13EAF7E61D9BDFC400AB86CE /* FetchedEntries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedEntries.swift; sourceTree = "<group>"; };
 		13EE26311D8ED8CA00D7A8B0 /* EsaEntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsaEntryCell.swift; sourceTree = "<group>"; };
 		13EE26331D8EDD6C00D7A8B0 /* EsaEntryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntryCell.xib; sourceTree = "<group>"; };
 		13EE26351D8EEB0C00D7A8B0 /* Esa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Esa.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				13EE263B1D8EF51500D7A8B0 /* CustomDateTransform.swift */,
 				13EE263D1D8F7BAA00D7A8B0 /* NSColorExtension.swift */,
 				13EE263F1D8FB05900D7A8B0 /* EventMonitor.swift */,
+				13EAF7E61D9BDFC400AB86CE /* FetchedEntries.swift */,
 			);
 			path = EsaMenu;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13EAF7E71D9BDFC400AB86CE /* FetchedEntries.swift in Sources */,
 				13EE263A1D8EEBDC00D7A8B0 /* Configuration.swift in Sources */,
 				13EE26381D8EEBC000D7A8B0 /* Entry.swift in Sources */,
 				13EE26321D8ED8CA00D7A8B0 /* EsaEntryCell.swift in Sources */,
