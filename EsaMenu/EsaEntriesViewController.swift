@@ -11,6 +11,12 @@ import Cocoa
 class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var progress: NSProgressIndicator! {
+        didSet {
+            progress.wantsLayer = true
+            progress.layer?.backgroundColor = NSColor.clearColor().CGColor
+        }
+    }
     
     private var entries = FetchedEntries()
     private weak var timer: NSTimer?
@@ -18,10 +24,12 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        view.wantsLayer = true
+        view.layer?.cornerRadius = 4
         tableView.registerNib(NSNib(nibNamed: "EsaEntryCell", bundle: nil), forIdentifier: "EsaEntryCellIdentifier")
         tableView.setDelegate(self)
         tableView.setDataSource(self)
+        tableView.selectionHighlightStyle = .None
         
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(updatePosts(_:)), userInfo: nil, repeats: true)
         timer?.fire()
@@ -33,6 +41,9 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     func updatePosts(timer: NSTimer) {
         print("timer fired")
+        progress.hidden = false
+        progress.startAnimation(self)
+        
         Entry.list() { [weak self] result in
             guard let strongSelf = self else { return }
             switch result {
@@ -44,6 +55,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
             case .Failure(_):
                 print("error")
             }
+            strongSelf.progress.hidden = true
         }
     }
     
