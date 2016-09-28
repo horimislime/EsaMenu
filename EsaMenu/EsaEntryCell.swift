@@ -26,6 +26,7 @@ final class EsaEntryCell: NSTableCellView {
         entryCategoryField.backgroundColor = NSColor.clearColor()
         entryCategoryField.textColor = NSColor(type: .darkGray)
         entryTitleField.backgroundColor = NSColor.clearColor()
+        entryTitleField.selectable = false
         userImageView.layer?.cornerRadius = userImageView.frame.width / 2
         
         wipLabel.wantsLayer = true
@@ -43,7 +44,7 @@ final class EsaEntryCell: NSTableCellView {
             wipLabelRightMarginConstraint.constant = 0
         }
         
-        entryTitleField.stringValue = entry.name
+        entryTitleField.setText(entry.name, link: NSURL(string: entry.url)!)
         entryCategoryField.stringValue = entry.category ?? ""
         
         let days = entry.updatedAt.mt_daysUntilDate(NSDate())

@@ -41,7 +41,7 @@ class Entry : Mappable {
     var category: String?
     var wip = true
     var message: String?
-    var url: String?
+    var url: String!
     
     var createdAt: NSDate!
     var updatedAt: NSDate!
