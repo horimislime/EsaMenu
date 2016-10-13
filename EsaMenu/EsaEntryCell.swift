@@ -14,7 +14,11 @@ final class EsaEntryCell: NSTableCellView {
     @IBOutlet weak var userImageView: NSImageView!
     @IBOutlet weak var entryCategoryField: NSTextField!
     @IBOutlet weak var entryTitleField: NSTextField!
-    @IBOutlet weak var wipLabel: NSView!
+    
+    @IBOutlet weak var wipView: NSView!
+    @IBOutlet weak var wipLabel: NSTextField! {
+        didSet { wipLabel.wantsLayer = true }
+    }
     @IBOutlet weak var wipLabelRightMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var wipLabelWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var lastUpdateLabel: NSTextField!
@@ -29,8 +33,10 @@ final class EsaEntryCell: NSTableCellView {
         entryTitleField.selectable = false
         userImageView.layer?.cornerRadius = userImageView.frame.width / 2
         
-        wipLabel.wantsLayer = true
-        wipLabel.layer?.cornerRadius = 5
+//        wipView.wantsLayer = true
+//        wipView.layer?.masksToBounds = true
+//        wipView.layer?.backgroundColor = NSColor(type: .lightGray).CGColor
+        wipView.layer?.cornerRadius = 5
     }
     
     func configure(entry: Entry) {
@@ -39,9 +45,9 @@ final class EsaEntryCell: NSTableCellView {
         if entry.wip {
             self.alphaValue = 0.5
         } else {
-            wipLabel.hidden = true
-            wipLabelWidthConstraint.constant = 0
-            wipLabelRightMarginConstraint.constant = 0
+//            wipLabel.hidden = true
+//            wipLabelWidthConstraint.constant = 0
+//            wipLabelRightMarginConstraint.constant = 0
         }
         
         entryTitleField.setText(entry.name, link: NSURL(string: entry.url)!)
