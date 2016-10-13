@@ -18,6 +18,19 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         }
     }
     
+    @IBOutlet weak var settingsButton: NSButton!
+    
+    @IBAction func settingsButtonTapped(sender: AnyObject) {
+        let menu = NSMenu(title: "settings")
+        menu.insertItemWithTitle("Quit", action: #selector(quitMenuTapped(_:)), keyEquivalent: "q", atIndex: 0)
+        NSMenu.popUpContextMenu(menu, withEvent: NSApplication.sharedApplication().currentEvent!, forView: settingsButton)
+    }
+    
+    func quitMenuTapped(sender: NSMenu) {
+        print("quitMenuTapped")
+        NSApplication.sharedApplication().terminate(sender)
+    }
+    
     private var entries = FetchedEntries()
     private weak var timer: NSTimer?
     
