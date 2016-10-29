@@ -22,7 +22,10 @@
                 </imageView>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qxL-zg-7Wb">
                     <rect key="frame" x="90" y="2" width="120" height="17"/>
-                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="left" title="esaの新着記事をmenuに表示する" drawsBackground="YES" id="AEo-c5-EcT">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="KQC-CB-0Bc"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="left" title="esaの新着記事をmenuに表示する" drawsBackground="YES" id="AEo-c5-EcT">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -61,7 +64,7 @@
                                 <constraint firstAttribute="width" constant="25" id="upT-Lh-8d8"/>
                             </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="WIP" id="nku-JX-XNR">
-                                <font key="font" metaFont="system" size="11"/>
+                                <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" red="1" green="0.48897572977065362" blue="0.49453457042843596" alpha="0.0" colorSpace="calibratedRGB"/>
                             </textFieldCell>
@@ -87,7 +90,6 @@
                 <constraint firstItem="9lF-QT-8wv" firstAttribute="leading" secondItem="qxL-zg-7Wb" secondAttribute="trailing" constant="4" id="eht-lB-Ttu"/>
                 <constraint firstItem="qxL-zg-7Wb" firstAttribute="top" secondItem="QDz-QM-jhQ" secondAttribute="bottom" constant="2" id="iLq-wu-0V6"/>
                 <constraint firstItem="BtE-zm-ec1" firstAttribute="centerY" secondItem="cmP-SL-LGr" secondAttribute="centerY" id="oAJ-m9-vHp"/>
-                <constraint firstAttribute="bottom" secondItem="qxL-zg-7Wb" secondAttribute="bottom" constant="2" id="oG2-np-S6x"/>
                 <constraint firstItem="V7g-XL-cug" firstAttribute="top" secondItem="QDz-QM-jhQ" secondAttribute="bottom" constant="4" id="r29-8X-G6H"/>
                 <constraint firstItem="QDz-QM-jhQ" firstAttribute="top" secondItem="cmP-SL-LGr" secondAttribute="top" constant="2" id="zHs-He-Ey5"/>
             </constraints>
@@ -96,6 +98,7 @@
                 <outlet property="entryTitleField" destination="qxL-zg-7Wb" id="jkW-BO-ONz"/>
                 <outlet property="imageView" destination="BtE-zm-ec1" id="ujs-yG-Q2c"/>
                 <outlet property="lastUpdateLabel" destination="9lF-QT-8wv" id="rsK-3Z-uPq"/>
+                <outlet property="lastUpdateWidthConstraint" destination="qJP-jU-zSc" id="hUv-82-AUJ"/>
                 <outlet property="userImageView" destination="BtE-zm-ec1" id="PEb-fS-PBd"/>
                 <outlet property="wipView" destination="V7g-XL-cug" id="Amv-kE-0yx"/>
             </connections>
