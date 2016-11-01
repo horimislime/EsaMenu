@@ -11,7 +11,7 @@ import Cocoa
 extension NSTextField {
     func setText(text: String, link: NSURL) {
         allowsEditingTextAttributes = true
-        selectable = true
+//        selectable = true
         attributedStringValue = NSAttributedString.hyperlink(text, link: link)
     }
 }

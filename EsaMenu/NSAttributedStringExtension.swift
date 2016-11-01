@@ -16,6 +16,10 @@ extension NSAttributedString {
         
         attr.beginEditing()
         attr.addAttribute(NSLinkAttributeName, value: link.absoluteURL, range: range)
+        attr.addAttribute(NSForegroundColorAttributeName,
+                                value: NSColor.blueColor(), range: range)
+        attr.addAttribute(NSUnderlineStyleAttributeName,
+                                value: NSUnderlineStyle.StyleSingle.rawValue, range: range)
         attr.endEditing()
         
         return attr

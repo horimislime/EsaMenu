@@ -25,6 +25,7 @@ final class EsaEntryCell: NSTableCellView {
     @IBOutlet weak var lastUpdateLabel: NSTextField!
     @IBOutlet weak var lastUpdateWidthConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var titleTextField: NSTextFieldCell!
     override func awakeFromNib() {
         super.awakeFromNib()
         wantsLayer = true
@@ -32,7 +33,10 @@ final class EsaEntryCell: NSTableCellView {
         entryCategoryField.backgroundColor = NSColor.clearColor()
         entryCategoryField.textColor = NSColor(type: .darkGray)
         entryTitleField.backgroundColor = NSColor.clearColor()
-        entryTitleField.selectable = false
+        entryTitleField.performClick(NSApplication.sharedApplication().currentEvent)
+        entryTitleField.becomeFirstResponder()
+//        entryTitleField.selectable = false
+//        entryTitleField.foc
         userImageView.layer?.cornerRadius = userImageView.frame.width / 2
     }
     
@@ -48,6 +52,8 @@ final class EsaEntryCell: NSTableCellView {
         }
         
         entryTitleField.setText(entry.name, link: NSURL(string: entry.url)!)
+        
+//        titleTextField.attributedStringValue = NSAttributedString.hyperlink(entry.name, link: NSURL(string: entry.url)!)
         entryCategoryField.stringValue = entry.category ?? ""
         
         let days = entry.updatedAt.mt_daysUntilDate(NSDate())
@@ -60,9 +66,5 @@ final class EsaEntryCell: NSTableCellView {
         } else {
             lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(NSDate().mt_hoursSinceDate(entry.updatedAt))h"
         }
-    }
-    
-    @IBAction func entryTitleSelected(sender: AnyObject) {
-        print("")
     }
 }
