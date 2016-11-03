@@ -13,19 +13,17 @@ final class EsaEntryCell: NSTableCellView {
     
     @IBOutlet weak var userImageView: NSImageView!
     @IBOutlet weak var entryCategoryField: NSTextField!
-    @IBOutlet weak var entryTitleField: NSTextField!
-    @IBOutlet weak var wipLabel: NSTextField! {
-        didSet {
-            wipLabel.wantsLayer = true
-            wipLabel.layer?.backgroundColor = NSColor(type: .lightGray).CGColor
-        }
+    @IBOutlet weak var entryTitleContainerScrollView: NSScrollView!
+    @IBOutlet var entryTitleField: NSTextField! {
+        didSet { entryTitleField.backgroundColor = NSColor.clearColor() }
     }
+    @IBOutlet weak var wipLabel: NSButton!
     @IBOutlet weak var wipLabelRightMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var wipLabelWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var lastUpdateLabel: NSTextField!
-    @IBOutlet weak var lastUpdateWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var lastUpdateLabel: NSTextField! {
+        didSet { lastUpdateLabel.backgroundColor = NSColor.clearColor() }
+    }
     
-    @IBOutlet weak var titleTextField: NSTextFieldCell!
     override func awakeFromNib() {
         super.awakeFromNib()
         wantsLayer = true
@@ -33,10 +31,6 @@ final class EsaEntryCell: NSTableCellView {
         entryCategoryField.backgroundColor = NSColor.clearColor()
         entryCategoryField.textColor = NSColor(type: .darkGray)
         entryTitleField.backgroundColor = NSColor.clearColor()
-        entryTitleField.performClick(NSApplication.sharedApplication().currentEvent)
-        entryTitleField.becomeFirstResponder()
-//        entryTitleField.selectable = false
-//        entryTitleField.foc
         userImageView.layer?.cornerRadius = userImageView.frame.width / 2
     }
     
@@ -48,12 +42,12 @@ final class EsaEntryCell: NSTableCellView {
         } else {
             wipLabel.hidden = true
             wipLabelWidthConstraint.constant = 0
-            wipLabelRightMarginConstraint.constant = 23
+            wipLabelRightMarginConstraint.constant = 30
         }
         
-        entryTitleField.setText(entry.name, link: NSURL(string: entry.url)!)
+        entryTitleField.stringValue = entry.name
+        entryTitleField.editable = false
         
-//        titleTextField.attributedStringValue = NSAttributedString.hyperlink(entry.name, link: NSURL(string: entry.url)!)
         entryCategoryField.stringValue = entry.category ?? ""
         
         let days = entry.updatedAt.mt_daysUntilDate(NSDate())

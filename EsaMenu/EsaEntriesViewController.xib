@@ -20,13 +20,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkd-3P-BiL">
-                    <rect key="frame" x="0.0" y="42" width="342" height="274"/>
+                    <rect key="frame" x="0.0" y="25" width="342" height="291"/>
                     <clipView key="contentView" id="o9J-Zc-zDm">
-                        <rect key="frame" x="0.0" y="0.0" width="342" height="274"/>
+                        <rect key="frame" x="0.0" y="0.0" width="342" height="291"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="xVp-d2-zJH">
-                                <rect key="frame" x="0.0" y="0.0" width="342" height="0.0"/>
+                                <rect key="frame" x="0.0" y="0.0" width="342" height="291"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -64,13 +64,13 @@
                     <rect key="frame" x="163" y="150" width="16" height="16"/>
                 </progressIndicator>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="7Kb-8g-Urx">
-                    <rect key="frame" x="0.0" y="0.0" width="342" height="42"/>
+                    <rect key="frame" x="0.0" y="0.0" width="342" height="28"/>
                     <subviews>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="s8z-QZ-Xve">
-                            <rect key="frame" x="310" y="9" width="24" height="24"/>
+                            <rect key="frame" x="320" y="6" width="16" height="16"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="24" id="0ci-YW-y5Z"/>
-                                <constraint firstAttribute="width" constant="24" id="LB2-mB-0zo"/>
+                                <constraint firstAttribute="height" constant="16" id="0ci-YW-y5Z"/>
+                                <constraint firstAttribute="width" constant="16" id="LB2-mB-0zo"/>
                             </constraints>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSActionTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="h51-b4-Xog">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -82,9 +82,9 @@
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="s8z-QZ-Xve" secondAttribute="trailing" constant="8" id="sh3-GQ-Xuh"/>
+                        <constraint firstAttribute="trailing" secondItem="s8z-QZ-Xve" secondAttribute="trailing" constant="6" id="sh3-GQ-Xuh"/>
                         <constraint firstItem="s8z-QZ-Xve" firstAttribute="centerY" secondItem="7Kb-8g-Urx" secondAttribute="centerY" id="u7M-rf-8X5"/>
-                        <constraint firstAttribute="height" constant="42" id="ydF-Oe-3nH"/>
+                        <constraint firstAttribute="height" constant="28" id="ydF-Oe-3nH"/>
                     </constraints>
                 </customView>
             </subviews>
@@ -92,7 +92,7 @@
                 <constraint firstItem="jkd-3P-BiL" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="4Pt-Ga-Clu"/>
                 <constraint firstAttribute="trailing" secondItem="7Kb-8g-Urx" secondAttribute="trailing" id="CzF-6J-Fu0"/>
                 <constraint firstItem="7Kb-8g-Urx" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="UZV-L1-wCx"/>
-                <constraint firstItem="7Kb-8g-Urx" firstAttribute="top" secondItem="jkd-3P-BiL" secondAttribute="bottom" id="Z0l-FH-EEl"/>
+                <constraint firstItem="7Kb-8g-Urx" firstAttribute="top" secondItem="jkd-3P-BiL" secondAttribute="bottom" constant="-3" id="Z0l-FH-EEl"/>
                 <constraint firstItem="jkd-3P-BiL" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="a4R-rt-RqM"/>
                 <constraint firstItem="a7e-MX-90A" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="aa0-AZ-eAP"/>
                 <constraint firstAttribute="trailing" secondItem="jkd-3P-BiL" secondAttribute="trailing" id="bPT-vw-1u5"/>

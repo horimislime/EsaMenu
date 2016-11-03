@@ -43,7 +43,8 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         tableView.setDelegate(self)
         tableView.setDataSource(self)
         tableView.selectionHighlightStyle = .None
-//        tableView.rowHeight = -1
+        tableView.focusRingType = .None
+        
         
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(updatePosts(_:)), userInfo: nil, repeats: true)
         timer?.fire()
@@ -91,10 +92,20 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         return cell
     }
     
-    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+    func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {
         
+        if tableView.selectedRow == -1 { return true }
         
+        let cell = tableView.viewAtColumn(0, row: tableView.selectedRow, makeIfNecessary: true)
+        cell!.layer!.backgroundColor = NSColor.clearColor().CGColor
+        return true
+    }
+    
+    func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        NSWorkspace.sharedWorkspace().openURL(NSURL(string: entries.sorted()[row].url)!)
         
-        return "hoge"
+        let cell = tableView.viewAtColumn(0, row: row, makeIfNecessary: true)
+        cell!.layer!.backgroundColor = NSColor(type: .lightGray).CGColor
+        return true
     }
 }
