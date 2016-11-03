@@ -43,6 +43,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         tableView.setDelegate(self)
         tableView.setDataSource(self)
         tableView.selectionHighlightStyle = .None
+//        tableView.rowHeight = -1
         
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(updatePosts(_:)), userInfo: nil, repeats: true)
         timer?.fire()
@@ -78,7 +79,10 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     }
     
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 45
+        let cell = tableView.makeViewWithIdentifier("EsaEntryCellIdentifier", owner: self) as! EsaEntryCell
+        cell.configure(entries.sorted()[row])
+        cell.layoutSubtreeIfNeeded()
+        return cell.frame.height
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
