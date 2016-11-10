@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <tableCellView id="ato-mA-39y" customClass="EsaEntryLoadCell" customModule="EsaMenu" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="405" height="112"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="GNp-QR-msk">
+                    <rect key="frame" x="195" y="48" width="16" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="i0v-nI-dTu"/>
+                        <constraint firstAttribute="width" constant="16" id="kmH-1Y-B4e"/>
+                    </constraints>
+                </progressIndicator>
+            </subviews>
+            <constraints>
+                <constraint firstItem="GNp-QR-msk" firstAttribute="centerY" secondItem="ato-mA-39y" secondAttribute="centerY" id="DyN-EM-C64"/>
+                <constraint firstItem="GNp-QR-msk" firstAttribute="centerX" secondItem="ato-mA-39y" secondAttribute="centerX" id="Pgf-8O-Loc"/>
+            </constraints>
+            <connections>
+                <outlet property="progress" destination="GNp-QR-msk" id="8j9-Fs-6Mt"/>
+            </connections>
+            <point key="canvasLocation" x="-23.5" y="282"/>
+        </tableCellView>
+    </objects>
+</document>
