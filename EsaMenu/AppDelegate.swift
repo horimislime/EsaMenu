@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         button.image = NSImage(named: "StatusBarButtonImage")
         button.action = #selector(statusBarButtonTapped(_:))
+        
+        popover.appearance = NSAppearance(named: NSAppearanceNameAqua)
         popover.contentViewController = EsaEntriesViewController(nibName: "EsaEntriesViewController", bundle: nil)
         
         monitor = EventMonitor(mask: [.LeftMouseDownMask, .RightMouseDownMask]) { [weak self] event in
