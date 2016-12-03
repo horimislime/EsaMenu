@@ -2,7 +2,13 @@
   "images" : [
     {
       "idiom" : "mac",
-      "filename" : "tasklist.pdf"
+      "filename" : "StatusBarButtonImage@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "mac",
+      "filename" : "StatusBarButtonImage@2x.png",
+      "scale" : "2x"
     }
   ],
   "info" : {
