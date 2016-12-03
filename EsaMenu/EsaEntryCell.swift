@@ -15,13 +15,17 @@ final class EsaEntryCell: NSTableCellView {
     @IBOutlet weak var entryCategoryField: NSTextField!
     @IBOutlet weak var entryTitleContainerScrollView: NSScrollView!
     @IBOutlet var entryTitleField: NSTextField! {
-        didSet { entryTitleField.backgroundColor = NSColor.clearColor() }
+        didSet {
+            entryTitleField.backgroundColor = NSColor.clearColor()
+        }
     }
     @IBOutlet weak var wipLabel: NSButton!
     @IBOutlet weak var wipLabelRightMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var wipLabelWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var lastUpdateLabel: NSTextField! {
-        didSet { lastUpdateLabel.backgroundColor = NSColor.clearColor() }
+        didSet {
+            lastUpdateLabel.backgroundColor = NSColor.clearColor()
+        }
     }
     
     override func awakeFromNib() {
@@ -57,8 +61,12 @@ final class EsaEntryCell: NSTableCellView {
             lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(formatter.stringFromDate(entry.updatedAt))"
         } else if days > 0 {
             lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(days)d"
-        } else {
+        } else if entry.updatedAt.mt_hoursUntilDate(NSDate()) > 0 {
             lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(NSDate().mt_hoursSinceDate(entry.updatedAt))h"
+        } else if entry.updatedAt.mt_minutesUntilDate(NSDate()) > 0 {
+            lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(NSDate().mt_minutesSinceDate(entry.updatedAt))m"
+        } else {
+            lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(NSDate().mt_secondsSinceDate(entry.updatedAt))s"
         }
     }
 }
