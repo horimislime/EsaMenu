@@ -10,6 +10,7 @@ target 'EsaMenu' do
   pod 'AlamofireObjectMapper', '1.1.0'
   pod 'MTDates'
   pod 'OAuthSwift'
+  pod 'DateTools'
 
   target 'EsaMenuTests' do
     inherit! :search_paths

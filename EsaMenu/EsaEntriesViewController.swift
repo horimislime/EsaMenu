@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import DateTools
 
 class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
@@ -14,6 +15,13 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var progress: NSProgressIndicator!
     @IBOutlet weak var settingsButton: NSButton!
+    @IBOutlet weak var footerView: NSView! {
+        didSet {
+            footerView.addBorder(NSColor.lightGrayColor(), width: 0.5, side: .bottom)
+        }
+    }
+    
+    @IBOutlet weak var lastUpdateLabel: NSTextField!
     
     @IBAction func settingsButtonTapped(sender: AnyObject) {
         let menu = NSMenu(title: "settings")
@@ -28,14 +36,17 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     private var entries = FetchedEntries()
     private weak var timer: NSTimer?
+    private weak var lastUpdateTimer: NSTimer?
     
     private var updating = false
+    private var lastUpdated: NSDate? = nil
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         view.wantsLayer = true
         view.layer?.cornerRadius = 4
+        view.layer?.backgroundColor = NSColor.whiteColor().CGColor
         tableView.registerNib(NSNib(nibNamed: "EsaEntryCell", bundle: nil), forIdentifier: "EsaEntryCellIdentifier")
         tableView.registerNib(NSNib(nibNamed: "EsaEntryLoadCell", bundle: nil), forIdentifier: "EsaEntryLoadCellIdentifier")
         tableView.setDelegate(self)
@@ -46,22 +57,23 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(scrollViewDidScroll(_:)), name: NSViewBoundsDidChangeNotification, object: scrollView.contentView)
         
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(updatePosts(_:)), userInfo: nil, repeats: true)
-        
-        
         timer?.fire()
+        lastUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: #selector(reloadLastUpdatedLabel), userInfo: nil, repeats: true)
+        lastUpdateTimer?.fire()
     }
     
     func scrollViewDidScroll(notification: NSNotification) {
         
         guard let contentView = scrollView.documentView else  { return }
-        
-        if contentView.visibleRect.origin.y > (contentView.frame.height - 300) && !updating {
+//        debugPrint("content height = \(contentView.frame.height) offset = \(contentView.visibleRect.origin.y)")
+        if contentView.visibleRect.origin.y > (contentView.frame.height - 500) && !updating {
             fetchMorePosts()
         }
     }
     
     deinit {
         timer?.invalidate()
+        lastUpdateTimer?.invalidate()
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
@@ -79,6 +91,8 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
                     Swift.debugPrint("success")
                     strongSelf.entries = entries
                     strongSelf.tableView.reloadData()
+                    strongSelf.lastUpdated = NSDate()
+                    strongSelf.reloadLastUpdatedLabel()
                     
                 case .Failure(_):
                     Swift.debugPrint("error")
@@ -91,6 +105,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
                 guard let strongSelf = self else { return }
                 strongSelf.tableView.reloadData()
                 strongSelf.progress.hidden = true
+                strongSelf.lastUpdated = NSDate()
             }
         }
     }
@@ -105,6 +120,11 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
             strongSelf.updating = false
             strongSelf.tableView.reloadData()
         }
+    }
+    
+    func reloadLastUpdatedLabel() {
+        guard let date = lastUpdated else { return }
+        lastUpdateLabel.stringValue = "Last Updated: \(date.timeAgoSinceNow())"
     }
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {

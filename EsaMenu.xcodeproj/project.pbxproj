@@ -11,6 +11,7 @@
 		133D71481D9BF212009BE111 /* NSTextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133D71471D9BF212009BE111 /* NSTextFieldExtension.swift */; };
 		133D714A1D9BF2E1009BE111 /* NSAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133D71491D9BF2E1009BE111 /* NSAttributedStringExtension.swift */; };
 		135DD4571DD4A6BE003EF87F /* EsaEntryLoadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135DD4561DD4A6BE003EF87F /* EsaEntryLoadCell.swift */; };
+		137F63841DF44EED0074966D /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137F63831DF44EED0074966D /* UIViewExtension.swift */; };
 		139A15CA1D8E8B2A0074623F /* EsaEntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A15C81D8E8B2A0074623F /* EsaEntriesViewController.swift */; };
 		139A15CB1D8E8B2A0074623F /* EsaEntriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 139A15C91D8E8B2A0074623F /* EsaEntriesViewController.xib */; };
 		13BD0F7C1DD4A7D9003C5C1F /* EsaEntryLoadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13BD0F7B1DD4A7D9003C5C1F /* EsaEntryLoadCell.xib */; };
@@ -44,6 +45,7 @@
 		133D71471D9BF212009BE111 /* NSTextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTextFieldExtension.swift; sourceTree = "<group>"; };
 		133D71491D9BF2E1009BE111 /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
 		135DD4561DD4A6BE003EF87F /* EsaEntryLoadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsaEntryLoadCell.swift; sourceTree = "<group>"; };
+		137F63831DF44EED0074966D /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		139A15C81D8E8B2A0074623F /* EsaEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsaEntriesViewController.swift; sourceTree = "<group>"; };
 		139A15C91D8E8B2A0074623F /* EsaEntriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntriesViewController.xib; sourceTree = "<group>"; };
 		13BD0F7B1DD4A7D9003C5C1F /* EsaEntryLoadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntryLoadCell.xib; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				133D71491D9BF2E1009BE111 /* NSAttributedStringExtension.swift */,
 				135DD4561DD4A6BE003EF87F /* EsaEntryLoadCell.swift */,
 				13BD0F7B1DD4A7D9003C5C1F /* EsaEntryLoadCell.xib */,
+				137F63831DF44EED0074966D /* UIViewExtension.swift */,
 			);
 			path = EsaMenu;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				13EAF7E71D9BDFC400AB86CE /* FetchedEntries.swift in Sources */,
 				135DD4571DD4A6BE003EF87F /* EsaEntryLoadCell.swift in Sources */,
 				13EE263A1D8EEBDC00D7A8B0 /* Configuration.swift in Sources */,
+				137F63841DF44EED0074966D /* UIViewExtension.swift in Sources */,
 				133D714A1D9BF2E1009BE111 /* NSAttributedStringExtension.swift in Sources */,
 				13EE26381D8EEBC000D7A8B0 /* Entry.swift in Sources */,
 				13EE26321D8ED8CA00D7A8B0 /* EsaEntryCell.swift in Sources */,
