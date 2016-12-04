@@ -13,20 +13,12 @@ final class EsaEntryCell: NSTableCellView {
     
     @IBOutlet weak var userImageView: NSImageView!
     @IBOutlet weak var entryCategoryField: NSTextField!
-    @IBOutlet weak var entryTitleContainerScrollView: NSScrollView!
-    @IBOutlet var entryTitleField: NSTextField! {
-        didSet {
-            entryTitleField.backgroundColor = NSColor.clearColor()
-        }
-    }
-    @IBOutlet weak var wipLabel: NSButton!
+    @IBOutlet weak var entryTitleField: NSTextField!
+    @IBOutlet weak var lastUpdateLabel: NSTextField!
+    
     @IBOutlet weak var wipLabelRightMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var wipLabelWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var lastUpdateLabel: NSTextField! {
-        didSet {
-            lastUpdateLabel.backgroundColor = NSColor.clearColor()
-        }
-    }
+    @IBOutlet weak var categoryTopMarginConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,18 +33,24 @@ final class EsaEntryCell: NSTableCellView {
     func configure(entry: Entry) {
         
         userImageView.image = NSImage(contentsOfURL: entry.updatedBy.iconURL)
+        
         if entry.wip {
             self.alphaValue = 0.5
         } else {
-            wipLabel.hidden = true
             wipLabelWidthConstraint.constant = 0
-            wipLabelRightMarginConstraint.constant = 30
+            wipLabelRightMarginConstraint.constant = 0
         }
         
         entryTitleField.stringValue = entry.name
         entryTitleField.editable = false
         
-        entryCategoryField.stringValue = entry.category ?? ""
+        if let category = entry.category {
+            entryCategoryField.stringValue = category
+        } else {
+            entryCategoryField.stringValue = ""
+            categoryTopMarginConstraint.constant = 0
+        }
+        
         
         let days = entry.updatedAt.mt_daysUntilDate(NSDate())
         if days > 3 {
