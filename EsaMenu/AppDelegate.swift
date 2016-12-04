@@ -10,7 +10,7 @@ import Cocoa
 import OAuthSwift
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, TeamSelectionViewControllerDelegate {
 
     @IBOutlet weak var window: NSWindow!
     private var statusItem: NSStatusItem!
@@ -26,7 +26,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         button.action = #selector(statusBarButtonTapped(_:))
         
         popover.appearance = NSAppearance(named: NSAppearanceNameAqua)
-        popover.contentViewController = EsaEntriesViewController(nibName: "EsaEntriesViewController", bundle: nil)
+        let teamController = TeamSelectionViewController(nibName: "TeamSelectionViewController", bundle: nil)
+        teamController?.delegate = self
+        popover.contentViewController = teamController
         
         monitor = EventMonitor(mask: [.LeftMouseDownMask, .RightMouseDownMask]) { [weak self] event in
             
@@ -83,6 +85,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             popover.performClose(sender)
         }
+    }
+    
+    func viewController(controller: TeamSelectionViewController, selectedTeam: Team) {
+        NSUserDefaults.standardUserDefaults().setObject(selectedTeam.name, forKey: "esa-current-team-name")
+        debugPrint("will change viewcontroller")
+        popover.contentViewController = EsaEntriesViewController(nibName: "EsaEntriesViewController", bundle: nil)
     }
 }
 

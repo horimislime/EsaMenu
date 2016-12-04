@@ -15,11 +15,12 @@ enum Router: URLRequestConvertible {
     static let baseURLString = "https://api.esa.io/v1"
     
     case Posts(Configuration, Int)
+    case Teams
     
     var method: Alamofire.Method {
         switch self {
-        case .Posts:
-            return .GET
+        case .Posts: return .GET
+        case .Teams: return .GET
         }
     }
     
@@ -31,6 +32,8 @@ enum Router: URLRequestConvertible {
             switch self {
             case .Posts(let config, let page):
                 return ("/teams/\(config.teamName!)/posts", ["page": page, "per_page": 50])
+            case .Teams:
+                return ("/teams", [:])
             }
         }()
         
