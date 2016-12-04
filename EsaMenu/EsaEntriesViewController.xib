@@ -8,6 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="EsaEntriesViewController" customModule="EsaMenu" customModuleProvider="target">
             <connections>
                 <outlet property="progress" destination="a7e-MX-90A" id="Q51-at-JU1"/>
+                <outlet property="scrollView" destination="jkd-3P-BiL" id="neN-3X-hWQ"/>
                 <outlet property="settingsButton" destination="s8z-QZ-Xve" id="Y7d-ih-5Ot"/>
                 <outlet property="tableView" destination="xVp-d2-zJH" id="pdP-L1-bAy"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>

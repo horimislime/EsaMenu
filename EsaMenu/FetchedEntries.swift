@@ -6,31 +6,93 @@
 //  Copyright © 2016 horimislime. All rights reserved.
 //
 
-import Foundation
+import Alamofire
+import AlamofireObjectMapper
+import ObjectMapper
 
-final class FetchedEntries {
+final class FetchedEntries: Mappable {
     
-    private var entries = [Entry]()
+    private var posts = [Entry]()
+    var nextPage: Int!
     
     var count: Int {
-        return entries.count
+        return posts.count
     }
     
+    required convenience init?(_ map: Map) {
+        self.init()
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        posts <- map["posts"]
+        nextPage <- map["next_page"]
+    }
+
+    
     func sorted() -> [Entry] {
-        return entries.sort({ $0.0.updatedAt > $0.1.updatedAt })
+        return posts.sort({ $0.0.updatedAt > $0.1.updatedAt })
     }
     
     func push(entries: [Entry]) {
         for entry in entries {
-            guard let targetIndex = self.entries.indexOf({ $0.number == entry.number }) else {
-                self.entries.append(entry)
+            guard let targetIndex = posts.indexOf({ $0.number == entry.number }) else {
+                posts.append(entry)
                 continue
             }
             
-            if self.entries[targetIndex].updatedAt != entry.updatedAt {
-                self.entries.removeAtIndex(targetIndex)
-                self.entries.append(entry)
+            if posts[targetIndex].updatedAt != entry.updatedAt {
+                posts.removeAtIndex(targetIndex)
+                posts.append(entry)
             }
+        }
+    }
+    
+    class func fetch(completion: Result<FetchedEntries, NSError> -> Void) {
+        Alamofire.request(Router.Posts(Configuration.load(), 1))
+            .validate()
+            .responseObject { (response: FetchedEntries?, error: ErrorType?) in
+                if let model = response {
+                    completion(.Success(model))
+                    return
+                }
+                
+                completion(.Failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+        }
+    }
+    
+    func fetchLatest(completion: NSError? -> Void) {
+        Alamofire.request(Router.Posts(Configuration.load(), 1))
+            .validate()
+            .responseObject { [weak self] (response: FetchedEntries?, error: ErrorType?) in
+                
+                guard let strongSelf = self else { return }
+                
+                if let model = response {
+                    strongSelf.push(model.posts)
+                    return
+                }
+                completion(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil))
+        }
+    }
+    
+    func fetchMore(completion: NSError? -> Void) {
+        
+        Alamofire
+            .request(Router.Posts(Configuration.load(), nextPage))
+            .validate()
+            .responseObject { [weak self] (response: FetchedEntries?, error: ErrorType?) in
+                
+                guard let strongSelf = self else { return }
+                
+                if let model = response {
+                    strongSelf.posts.appendContentsOf(model.posts)
+                    strongSelf.nextPage = model.nextPage
+                    completion(nil)
+                    return
+                }
+                
+                completion((NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
         }
     }
 }

@@ -50,12 +50,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             Esa.authorize { [weak self] result in
                 switch result {
                 case .Success(let credential):
-                    print("auth success")
+                    debugPrint("auth success")
                     NSUserDefaults.standardUserDefaults().setObject(NSKeyedArchiver.archivedDataWithRootObject(credential), forKey: "esa-credential")
                     self?.popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
                     
                 case .Failure(let error):
-                    print("auth error: \(error.localizedDescription)")
+                    debugPrint("auth error: \(error.localizedDescription)")
                 }
             }
             return

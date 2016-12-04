@@ -14,7 +14,7 @@ enum Router: URLRequestConvertible {
     
     static let baseURLString = "https://api.esa.io/v1"
     
-    case Posts(Configuration)
+    case Posts(Configuration, Int)
     
     var method: Alamofire.Method {
         switch self {
@@ -23,34 +23,28 @@ enum Router: URLRequestConvertible {
         }
     }
     
-    var URLString: String {
+    var URLRequest: NSMutableURLRequest {
         
-        let path: String = {
+        
+        
+        let result: (path: String, parameters: [String: AnyObject]) = {
             switch self {
-            case .Posts(let config):
-                return "/teams/\(config.teamName!)/posts"
+            case .Posts(let config, let page):
+                return ("/teams/\(config.teamName!)/posts", ["page": page, "per_page": 50])
             }
         }()
         
-        return Router.baseURLString + path
-    }
-    
-    var URLRequest: NSMutableURLRequest {
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: self.URLString)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: Router.baseURLString + result.path)!)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.HTTPMethod = method.rawValue
+
         
-        switch self {
-            
-        case .Posts(let config):
-            
-            if let raw = NSUserDefaults.standardUserDefaults().objectForKey("esa-credential") as? NSData, credential = NSKeyedUnarchiver.unarchiveObjectWithData(raw) {
-                request.setValue("Bearer \(credential.oauth_token)", forHTTPHeaderField: "Authorization")
-            }
-            
-            return request
+        if let raw = NSUserDefaults.standardUserDefaults().objectForKey("esa-credential") as? NSData, credential = NSKeyedUnarchiver.unarchiveObjectWithData(raw) {
+            request.setValue("Bearer \(credential.oauth_token)", forHTTPHeaderField: "Authorization")
         }
+        
+        let encoding = Alamofire.ParameterEncoding.URL
+        return encoding.encode(request, parameters: result.parameters).0
     }
 }
 
@@ -69,7 +63,7 @@ final class Esa {
                                        scope: "read", state: "app-secret",
                                        success: { credential, response, parameters in
             
-            print("credential = \(credential)")
+            debugPrint("credential = \(credential)")
             completion(.Success(credential))
             
             }, failure: { error in
