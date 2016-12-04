@@ -70,6 +70,7 @@ final class FetchedEntries: Mappable {
                 
                 if let model = response {
                     strongSelf.push(model.posts)
+                    completion(nil)
                     return
                 }
                 completion(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil))

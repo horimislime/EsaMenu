@@ -65,7 +65,6 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     func scrollViewDidScroll(notification: NSNotification) {
         
         guard let contentView = scrollView.documentView else  { return }
-//        debugPrint("content height = \(contentView.frame.height) offset = \(contentView.visibleRect.origin.y)")
         if contentView.visibleRect.origin.y > (contentView.frame.height - 500) && !updating {
             fetchMorePosts()
         }
@@ -158,12 +157,6 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         let cell = tableView.makeViewWithIdentifier("EsaEntryCellIdentifier", owner: self) as! EsaEntryCell
         cell.configure(entries.sorted()[row])
         return cell
-    }
-    
-    func tableView(tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-        
-        
-        return nil
     }
     
     func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {
