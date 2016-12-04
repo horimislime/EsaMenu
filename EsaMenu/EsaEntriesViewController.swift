@@ -53,6 +53,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         tableView.setDataSource(self)
         tableView.selectionHighlightStyle = .None
         tableView.focusRingType = .None
+        tableView.gridColor = NSColor.clearColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(scrollViewDidScroll(_:)), name: NSViewBoundsDidChangeNotification, object: scrollView.contentView)
         

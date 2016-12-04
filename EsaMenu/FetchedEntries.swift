@@ -49,7 +49,7 @@ final class FetchedEntries: Mappable {
     }
     
     class func fetch(completion: Result<FetchedEntries, NSError> -> Void) {
-        Alamofire.request(Router.Posts(Configuration.load(), 1))
+        Alamofire.request(Router.Posts(1))
             .validate()
             .responseObject { (response: FetchedEntries?, error: ErrorType?) in
                 if let model = response {
@@ -62,7 +62,7 @@ final class FetchedEntries: Mappable {
     }
     
     func fetchLatest(completion: NSError? -> Void) {
-        Alamofire.request(Router.Posts(Configuration.load(), 1))
+        Alamofire.request(Router.Posts(1))
             .validate()
             .responseObject { [weak self] (response: FetchedEntries?, error: ErrorType?) in
                 
@@ -80,7 +80,7 @@ final class FetchedEntries: Mappable {
     func fetchMore(completion: NSError? -> Void) {
         
         Alamofire
-            .request(Router.Posts(Configuration.load(), nextPage))
+            .request(Router.Posts(nextPage))
             .validate()
             .responseObject { [weak self] (response: FetchedEntries?, error: ErrorType?) in
                 

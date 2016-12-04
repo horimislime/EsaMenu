@@ -26,9 +26,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, TeamSelectionViewControllerD
         button.action = #selector(statusBarButtonTapped(_:))
         
         popover.appearance = NSAppearance(named: NSAppearanceNameAqua)
-        let teamController = TeamSelectionViewController(nibName: "TeamSelectionViewController", bundle: nil)
-        teamController?.delegate = self
-        popover.contentViewController = teamController
+        
+        if let _ = NSUserDefaults.standardUserDefaults().objectForKey("esa-current-team-name") {
+            popover.contentViewController = EsaEntriesViewController(nibName: "EsaEntriesViewController", bundle: nil)
+            
+        } else {
+            let controller = TeamSelectionViewController(nibName: "TeamSelectionViewController", bundle: nil)
+            controller?.delegate = self
+            popover.contentViewController = controller
+        }
         
         monitor = EventMonitor(mask: [.LeftMouseDownMask, .RightMouseDownMask]) { [weak self] event in
             

@@ -68,7 +68,7 @@ class Entry : Mappable {
     }
     
     class func list(completion: Result<[Entry], NSError> -> Void) {
-        Alamofire.request(Router.Posts(Configuration.load(), 1))
+        Alamofire.request(Router.Posts(1))
             .validate()
             .responseArray("posts") { (response: [Entry]?, error: ErrorType?) in
                 

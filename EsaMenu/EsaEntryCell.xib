@@ -46,11 +46,11 @@
                             </textFieldCell>
                         </textField>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9lF-QT-8wv">
-                            <rect key="frame" x="260" y="12" width="105" height="14"/>
+                            <rect key="frame" x="258" y="12" width="109" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="105" id="FqL-Ta-yQ3"/>
                             </constraints>
-                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" state="on" alignment="right" title="By horimislime 2d" drawsBackground="YES" id="ORz-9c-Kk1">
+                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" state="on" alignment="right" title="By horimislime 2d" id="ORz-9c-Kk1">
                                 <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

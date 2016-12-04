@@ -241,7 +241,7 @@
 				TargetAttributes = {
 					13FB32ED1D8E8026008725B1 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = KZ3W9FX44T;
+						DevelopmentTeam = 3XEXW5K93E;
 					};
 					13FB32FC1D8E8026008725B1 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -527,12 +527,14 @@
 			baseConfigurationReference = DAAB93F5F9A99251071AAE21 /* Pods-EsaMenu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hitoshi Nakamura (LZ6MRY38JF)";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = EsaMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu.EsaMenu;
+				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -541,12 +543,14 @@
 			baseConfigurationReference = 5FC350A4FE44312C4190D66C /* Pods-EsaMenu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hitoshi Nakamura (LZ6MRY38JF)";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Sohichiroh Horimi (3XEXW5K93E)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Sohichiroh Horimi (3XEXW5K93E)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = EsaMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu.EsaMenu;
+				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

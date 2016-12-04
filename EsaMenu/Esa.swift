@@ -14,7 +14,7 @@ enum Router: URLRequestConvertible {
     
     static let baseURLString = "https://api.esa.io/v1"
     
-    case Posts(Configuration, Int)
+    case Posts(Int)
     case Teams
     
     var method: Alamofire.Method {
@@ -27,11 +27,12 @@ enum Router: URLRequestConvertible {
     var URLRequest: NSMutableURLRequest {
         
         
-        
+
         let result: (path: String, parameters: [String: AnyObject]) = {
             switch self {
-            case .Posts(let config, let page):
-                return ("/teams/\(config.teamName!)/posts", ["page": page, "per_page": 50])
+            case .Posts(let page):
+                let team = NSUserDefaults.standardUserDefaults().objectForKey("esa-current-team-name") as! String
+                return ("/teams/\(team)/posts", ["page": page, "per_page": 50])
             case .Teams:
                 return ("/teams", [:])
             }
