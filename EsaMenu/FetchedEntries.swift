@@ -79,6 +79,11 @@ final class FetchedEntries: Mappable {
     
     func fetchMore(completion: NSError? -> Void) {
         
+        guard let nextPage = nextPage else {
+            completion(nil)
+            return
+        }
+        
         Alamofire
             .request(Router.Posts(nextPage))
             .validate()
