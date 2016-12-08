@@ -59,6 +59,7 @@
 		139A15C81D8E8B2A0074623F /* EsaEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsaEntriesViewController.swift; sourceTree = "<group>"; };
 		139A15C91D8E8B2A0074623F /* EsaEntriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntriesViewController.xib; sourceTree = "<group>"; };
 		13BD0F7B1DD4A7D9003C5C1F /* EsaEntryLoadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntryLoadCell.xib; sourceTree = "<group>"; };
+		13C667F71DF86B9200DF27EB /* EsaMenu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = EsaMenu.entitlements; sourceTree = "<group>"; };
 		13EAF7E61D9BDFC400AB86CE /* FetchedEntries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedEntries.swift; sourceTree = "<group>"; };
 		13EE26311D8ED8CA00D7A8B0 /* EsaEntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsaEntryCell.swift; sourceTree = "<group>"; };
 		13EE26331D8EDD6C00D7A8B0 /* EsaEntryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntryCell.xib; sourceTree = "<group>"; };
@@ -77,8 +78,10 @@
 		13FB33011D8E8026008725B1 /* EsaMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsaMenuTests.swift; sourceTree = "<group>"; };
 		13FB33031D8E8026008725B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24F47D873F2F8AF239489391 /* Pods_EsaMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsaMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31EE883CC23461EB61623788 /* Pods-EsaMenuTests.production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsaMenuTests.production.xcconfig"; path = "Pods/Target Support Files/Pods-EsaMenuTests/Pods-EsaMenuTests.production.xcconfig"; sourceTree = "<group>"; };
 		5030AFF3F371F30AC408F819 /* Pods_EsaMenuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EsaMenuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FC350A4FE44312C4190D66C /* Pods-EsaMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsaMenu.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsaMenu/Pods-EsaMenu.release.xcconfig"; sourceTree = "<group>"; };
+		67938B627D935F171B961068 /* Pods-EsaMenu.production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsaMenu.production.xcconfig"; path = "Pods/Target Support Files/Pods-EsaMenu/Pods-EsaMenu.production.xcconfig"; sourceTree = "<group>"; };
 		975EC0DE146F17063A5C6613 /* Pods-EsaMenuTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsaMenuTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsaMenuTests/Pods-EsaMenuTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B2ABC5A9DAF87A5D59689444 /* Pods-EsaMenuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsaMenuTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EsaMenuTests/Pods-EsaMenuTests.release.xcconfig"; sourceTree = "<group>"; };
 		DAAB93F5F9A99251071AAE21 /* Pods-EsaMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EsaMenu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EsaMenu/Pods-EsaMenu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +130,7 @@
 		13FB32F01D8E8026008725B1 /* EsaMenu */ = {
 			isa = PBXGroup;
 			children = (
+				13C667F71DF86B9200DF27EB /* EsaMenu.entitlements */,
 				13FB32F11D8E8026008725B1 /* AppDelegate.swift */,
 				13FB32F31D8E8026008725B1 /* Assets.xcassets */,
 				13FB32F51D8E8026008725B1 /* MainMenu.xib */,
@@ -172,6 +176,8 @@
 				5FC350A4FE44312C4190D66C /* Pods-EsaMenu.release.xcconfig */,
 				975EC0DE146F17063A5C6613 /* Pods-EsaMenuTests.debug.xcconfig */,
 				B2ABC5A9DAF87A5D59689444 /* Pods-EsaMenuTests.release.xcconfig */,
+				67938B627D935F171B961068 /* Pods-EsaMenu.production.xcconfig */,
+				31EE883CC23461EB61623788 /* Pods-EsaMenuTests.production.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -242,6 +248,11 @@
 					13FB32ED1D8E8026008725B1 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 3XEXW5K93E;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					13FB32FC1D8E8026008725B1 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -440,6 +451,74 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		13C667F81DF8E02700DF27EB /* Production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Production;
+		};
+		13C667F91DF8E02700DF27EB /* Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67938B627D935F171B961068 /* Pods-EsaMenu.production.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EsaMenu/EsaMenu.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Sohichiroh Horimi (3XEXW5K93E)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Sohichiroh Horimi (3XEXW5K93E)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EsaMenu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "73cf1ddc-ace9-4cd2-9994-cc4f3500ad2a";
+			};
+			name = Production;
+		};
+		13C667FA1DF8E02700DF27EB /* Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31EE883CC23461EB61623788 /* Pods-EsaMenuTests.production.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EsaMenuTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu.EsaMenuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EsaMenu.app/Contents/MacOS/EsaMenu";
+			};
+			name = Production;
+		};
 		13FB33041D8E8026008725B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -527,12 +606,13 @@
 			baseConfigurationReference = DAAB93F5F9A99251071AAE21 /* Pods-EsaMenu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EsaMenu/EsaMenu.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = EsaMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu;
+				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -543,14 +623,15 @@
 			baseConfigurationReference = 5FC350A4FE44312C4190D66C /* Pods-EsaMenu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Sohichiroh Horimi (3XEXW5K93E)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Sohichiroh Horimi (3XEXW5K93E)";
+				CODE_SIGN_ENTITLEMENTS = EsaMenu/EsaMenu.entitlements;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Sohichiroh Horimi (3XEXW5K93E)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "3rd Party Mac Developer Application: Sohichiroh Horimi (3XEXW5K93E)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = EsaMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b663c682-792f-4717-98c2-93231380857e";
 			};
 			name = Release;
 		};
@@ -590,6 +671,7 @@
 			buildConfigurations = (
 				13FB33041D8E8026008725B1 /* Debug */,
 				13FB33051D8E8026008725B1 /* Release */,
+				13C667F81DF8E02700DF27EB /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -599,6 +681,7 @@
 			buildConfigurations = (
 				13FB33071D8E8026008725B1 /* Debug */,
 				13FB33081D8E8026008725B1 /* Release */,
+				13C667F91DF8E02700DF27EB /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -608,6 +691,7 @@
 			buildConfigurations = (
 				13FB330A1D8E8026008725B1 /* Debug */,
 				13FB330B1D8E8026008725B1 /* Release */,
+				13C667FA1DF8E02700DF27EB /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
