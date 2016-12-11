@@ -31,6 +31,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     }
     
     func signOutMenuTapped(sender: NSMenu) {
+        timer?.invalidate()
         NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-credential")
         NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-current-team-name")
         (NSApplication.sharedApplication().delegate as? AppDelegate)?.showSignInPopover()

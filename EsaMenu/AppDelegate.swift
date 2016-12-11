@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         popover.appearance = NSAppearance(named: NSAppearanceNameAqua)
         
-        if let _ = NSUserDefaults.standardUserDefaults().objectForKey("esa-credential") {
+        if let _ = NSUserDefaults.standardUserDefaults().objectForKey("esa-credential"), let _ = NSUserDefaults.standardUserDefaults().objectForKey("esa-current-team-name") {
             showEntriesPopover()
             
         } else {
