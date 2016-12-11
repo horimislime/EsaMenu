@@ -34,4 +34,9 @@ class SignInViewController: NSViewController {
             }
         }
     }
+    
+    
+    @IBAction func quitButtonClicked(sender: NSButton) {
+        NSApplication.sharedApplication().terminate(self)
+    }
 }

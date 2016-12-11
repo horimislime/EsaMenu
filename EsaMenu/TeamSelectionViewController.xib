@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TeamSelectionViewController" customModule="EsaMenu" customModuleProvider="target">
             <connections>
+                <outlet property="settingsButton" destination="alV-j5-MPY" id="d0E-Qy-05J"/>
                 <outlet property="tableView" destination="tiW-gp-FEY" id="b4N-4v-Jc3"/>
                 <outlet property="view" destination="c22-O7-iKe" id="zDo-rV-GfE"/>
             </connections>
@@ -73,12 +74,39 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="Kd8-Eb-Afg">
+                    <rect key="frame" x="0.0" y="0.0" width="465" height="45"/>
+                    <subviews>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="alV-j5-MPY">
+                            <rect key="frame" x="425" y="12" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="S29-db-VPD"/>
+                                <constraint firstAttribute="width" constant="20" id="tac-W8-A65"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSActionTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="jPK-ne-isg">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="settingsButtonTapped:" target="-2" id="QKT-qY-Xw9"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="BwY-eE-BCZ"/>
+                        <constraint firstAttribute="trailing" secondItem="alV-j5-MPY" secondAttribute="trailing" constant="20" id="DZF-ew-iPx"/>
+                        <constraint firstItem="alV-j5-MPY" firstAttribute="centerY" secondItem="Kd8-Eb-Afg" secondAttribute="centerY" id="YWf-QZ-mQf"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstItem="LhI-V0-ekv" firstAttribute="top" secondItem="RDC-Ku-Cpe" secondAttribute="bottom" constant="8" id="2NE-Mf-rpv"/>
+                <constraint firstAttribute="bottom" secondItem="Kd8-Eb-Afg" secondAttribute="bottom" id="Dh1-rQ-0pc"/>
                 <constraint firstItem="LhI-V0-ekv" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="IRV-IA-gZS"/>
                 <constraint firstItem="RDC-Ku-Cpe" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="MGV-Cm-6cK"/>
+                <constraint firstAttribute="trailing" secondItem="Kd8-Eb-Afg" secondAttribute="trailing" id="OVg-ee-P7y"/>
                 <constraint firstItem="LhI-V0-ekv" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="wwh-Ik-Bjp"/>
+                <constraint firstItem="Kd8-Eb-Afg" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="zWe-xg-xna"/>
             </constraints>
             <point key="canvasLocation" x="703.5" y="459"/>
         </customView>
@@ -93,4 +121,7 @@
             <point key="canvasLocation" x="658" y="301"/>
         </textField>
     </objects>
+    <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+    </resources>
 </document>

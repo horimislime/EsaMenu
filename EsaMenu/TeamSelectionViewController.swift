@@ -15,6 +15,7 @@ protocol TeamSelectionViewControllerDelegate: class {
 final class TeamSelectionViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var settingsButton: NSButton!
     
     var teams = [Team]()
     weak var delegate: TeamSelectionViewControllerDelegate?
@@ -37,6 +38,24 @@ final class TeamSelectionViewController: NSViewController, NSTableViewDelegate, 
             }
         }
     }
+    
+    @IBAction func settingsButtonTapped(sender: NSButton) {
+        let menu = NSMenu(title: "settings")
+        menu.insertItemWithTitle("Sign out", action: #selector(signOutMenuTapped(_:)), keyEquivalent: "", atIndex: 0)
+        menu.insertItemWithTitle("Quit", action: #selector(quitMenuTapped(_:)), keyEquivalent: "q", atIndex: 1)
+        NSMenu.popUpContextMenu(menu, withEvent: NSApplication.sharedApplication().currentEvent!, forView: settingsButton)
+    }
+    
+    func signOutMenuTapped(sender: NSMenu) {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-credential")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-current-team-name")
+        (NSApplication.sharedApplication().delegate as? AppDelegate)?.showSignInPopover()
+    }
+    
+    func quitMenuTapped(sender: NSMenu) {
+        NSApplication.sharedApplication().terminate(sender)
+    }
+    
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         return teams.count

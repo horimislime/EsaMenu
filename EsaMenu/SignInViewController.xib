@@ -50,10 +50,26 @@
                         <action selector="loginButtonClicked:" target="-2" id="1mE-TZ-tjU"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aA8-s5-qd1">
+                    <rect key="frame" x="192" y="144" width="80" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="5Ab-0N-M9K"/>
+                        <constraint firstAttribute="height" constant="22" id="owT-ez-yDY"/>
+                    </constraints>
+                    <buttonCell key="cell" type="roundTextured" title="Quit" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ojc-4c-JNK">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="quitButtonClicked:" target="-2" id="0ou-ID-MGz"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="xtf-uR-h8A" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="116" id="0Bp-WY-1ZN"/>
                 <constraint firstItem="C1A-Rg-GnX" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="44D-aF-Z9D"/>
+                <constraint firstItem="aA8-s5-qd1" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="4bM-Cv-RBJ"/>
+                <constraint firstItem="aA8-s5-qd1" firstAttribute="top" secondItem="C1A-Rg-GnX" secondAttribute="bottom" constant="20" id="D9r-pG-iuJ"/>
                 <constraint firstItem="pMb-1H-ey5" firstAttribute="top" secondItem="xtf-uR-h8A" secondAttribute="bottom" constant="35" id="Q5M-Gf-xVU"/>
                 <constraint firstItem="pMb-1H-ey5" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="YoJ-CI-DRk"/>
                 <constraint firstItem="C1A-Rg-GnX" firstAttribute="top" secondItem="pMb-1H-ey5" secondAttribute="bottom" constant="33" id="lbZ-Gt-9M9"/>
