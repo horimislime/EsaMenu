@@ -52,10 +52,9 @@ enum Router: URLRequestConvertible {
     }
 }
 
-let env = NSProcessInfo.processInfo().environment
 let oauth: OAuth2Swift = OAuth2Swift(
-    consumerKey: env["consumerKey"]!,
-    consumerSecret: env["consumerSecret"]!,
+    consumerKey: Environment.consumerKey,
+    consumerSecret: Environment.consumerSecret,
     authorizeUrl: "https://api.esa.io/oauth/authorize",
     accessTokenUrl: "https://api.esa.io/oauth/token",
     responseType: "code"

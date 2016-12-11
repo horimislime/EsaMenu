@@ -153,3 +153,6 @@ Pods/
 .rvmrc
 
 *.xcodeproj/xcuserdata/*
+
+# Application specific
+EsaMenu/Environment.swift

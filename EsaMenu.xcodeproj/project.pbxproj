@@ -20,6 +20,7 @@
 		139A15CA1D8E8B2A0074623F /* EsaEntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A15C81D8E8B2A0074623F /* EsaEntriesViewController.swift */; };
 		139A15CB1D8E8B2A0074623F /* EsaEntriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 139A15C91D8E8B2A0074623F /* EsaEntriesViewController.xib */; };
 		13BD0F7C1DD4A7D9003C5C1F /* EsaEntryLoadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13BD0F7B1DD4A7D9003C5C1F /* EsaEntryLoadCell.xib */; };
+		13C57D901DFCEFB500251D2E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C57D8F1DFCEFB500251D2E /* Environment.swift */; };
 		13EAF7E71D9BDFC400AB86CE /* FetchedEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EAF7E61D9BDFC400AB86CE /* FetchedEntries.swift */; };
 		13EE26321D8ED8CA00D7A8B0 /* EsaEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EE26311D8ED8CA00D7A8B0 /* EsaEntryCell.swift */; };
 		13EE26341D8EDD6C00D7A8B0 /* EsaEntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13EE26331D8EDD6C00D7A8B0 /* EsaEntryCell.xib */; };
@@ -59,6 +60,7 @@
 		139A15C81D8E8B2A0074623F /* EsaEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsaEntriesViewController.swift; sourceTree = "<group>"; };
 		139A15C91D8E8B2A0074623F /* EsaEntriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntriesViewController.xib; sourceTree = "<group>"; };
 		13BD0F7B1DD4A7D9003C5C1F /* EsaEntryLoadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EsaEntryLoadCell.xib; sourceTree = "<group>"; };
+		13C57D8F1DFCEFB500251D2E /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		13C667F71DF86B9200DF27EB /* EsaMenu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = EsaMenu.entitlements; sourceTree = "<group>"; };
 		13EAF7E61D9BDFC400AB86CE /* FetchedEntries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedEntries.swift; sourceTree = "<group>"; };
 		13EE26311D8ED8CA00D7A8B0 /* EsaEntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsaEntryCell.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				137F638B1DF46AB60074966D /* Team.swift */,
 				137F638D1DF46CD30074966D /* TeamSelectionViewController.swift */,
 				137F638F1DF472AD0074966D /* TeamSelectionCell.xib */,
+				13C57D8F1DFCEFB500251D2E /* Environment.swift */,
 			);
 			path = EsaMenu;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				13FB32F21D8E8026008725B1 /* AppDelegate.swift in Sources */,
 				13EE26401D8FB05900D7A8B0 /* EventMonitor.swift in Sources */,
 				137F638C1DF46AB60074966D /* Team.swift in Sources */,
+				13C57D901DFCEFB500251D2E /* Environment.swift in Sources */,
 				13EE263E1D8F7BAA00D7A8B0 /* NSColorExtension.swift in Sources */,
 				137F638E1DF46CD30074966D /* TeamSelectionViewController.swift in Sources */,
 				139A15CA1D8E8B2A0074623F /* EsaEntriesViewController.swift in Sources */,
