@@ -1,0 +1,32 @@
+# coding: utf-8
+fastlane_version "1.111.0"
+default_platform :mac
+
+platform :mac do
+
+  before_all do |options|
+
+    increment_build_number(build_number: number_of_commits)
+    clean_build_artifacts
+
+  end
+
+  lane :production do |options|
+
+    version_no = get_version_number(target: "EsaMenu")
+    gym(scheme: "EsaMenu", configuration: "Production", use_legacy_build_api: true, archive_path: "./EsaMenu.xcarchive")
+    
+    zip(path: "./EsaMenu.app", output_path: "EsaMenu.app.zip")
+    set_github_release(
+      repository_name: "horimislime/EsaMenu",
+      api_token: ENV["GITHUB_TOKEN"],
+      name: "Release #{version_no}",
+      tag_name: "#{version_no}",
+      description: "",
+      commitish: "master",
+      upload_assets: ["EsaMenu.app.zip"]
+    )
+
+  end
+  
+end

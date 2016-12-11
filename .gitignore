@@ -157,4 +157,7 @@ Pods/
 # Application specific
 EsaMenu/Environment.swift
 EsaMenu.app
+EsaMenu.app.zip
 EsaMenu.app.dSYM.zip
+EsaMenu.xcarchive
+fastlane/.env
