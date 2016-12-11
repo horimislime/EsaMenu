@@ -514,6 +514,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "73cf1ddc-ace9-4cd2-9994-cc4f3500ad2a";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Production;
 		};
@@ -627,6 +628,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -644,6 +646,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.horimisli.esamenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b663c682-792f-4717-98c2-93231380857e";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
