@@ -25,8 +25,15 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     @IBAction func settingsButtonTapped(sender: AnyObject) {
         let menu = NSMenu(title: "settings")
-        menu.insertItemWithTitle("Quit", action: #selector(quitMenuTapped(_:)), keyEquivalent: "q", atIndex: 0)
+        menu.insertItemWithTitle("Sign out", action: #selector(signOutMenuTapped(_:)), keyEquivalent: "", atIndex: 0)
+        menu.insertItemWithTitle("Quit", action: #selector(quitMenuTapped(_:)), keyEquivalent: "q", atIndex: 1)
         NSMenu.popUpContextMenu(menu, withEvent: NSApplication.sharedApplication().currentEvent!, forView: settingsButton)
+    }
+    
+    func signOutMenuTapped(sender: NSMenu) {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-credential")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-current-team-name")
+        (NSApplication.sharedApplication().delegate as? AppDelegate)?.showSignInPopover()
     }
     
     func quitMenuTapped(sender: NSMenu) {

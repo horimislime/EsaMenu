@@ -28,12 +28,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.appearance = NSAppearance(named: NSAppearanceNameAqua)
         
         if let _ = NSUserDefaults.standardUserDefaults().objectForKey("esa-credential") {
-            popover.contentViewController = EsaEntriesViewController(nibName: "EsaEntriesViewController", bundle: nil)
+            showEntriesPopover()
             
         } else {
-            let controller = SignInViewController(nibName: "SignInViewController", bundle: nil)
-            controller?.delegate = self
-            popover.contentViewController = controller
+            showSignInPopover()
         }
         
         monitor = EventMonitor(mask: [.LeftMouseDownMask, .RightMouseDownMask]) { [weak self] event in
@@ -76,19 +74,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             popover.performClose(sender)
         }
     }
+    
+    func showSignInPopover() {
+        
+        let controller = SignInViewController(nibName: "SignInViewController", bundle: nil)
+        controller?.delegate = self
+        popover.contentViewController = controller
+        
+        if let button = statusItem.button where !popover.shown {
+            popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+        }
+    }
+    
+    func showTeamSelectionPopover() {
+        
+        let controller = TeamSelectionViewController(nibName: "TeamSelectionViewController", bundle: nil)
+        controller?.delegate = self
+        popover.contentViewController = controller
+        
+        if let button = statusItem.button where !popover.shown {
+            popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+        }
+    }
+    
+    func showEntriesPopover() {
+        popover.contentViewController = EsaEntriesViewController(nibName: "EsaEntriesViewController", bundle: nil)
+        if let button = statusItem.button where !popover.shown {
+            popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+        }
+    }
 }
 
 // MARK: SignInViewControllerDelegate
 
 extension AppDelegate: SignInViewControllerDelegate {
     func signInFinished(controller: SignInViewController) {
-        
-        guard let button = statusItem.button else { return }
-        
-        let controller = TeamSelectionViewController(nibName: "TeamSelectionViewController", bundle: nil)
-        controller?.delegate = self
-        popover.contentViewController = controller
-        popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+        showTeamSelectionPopover()
     }
     
     func signInFailed(controller: SignInViewController, error: NSError) {
@@ -100,10 +121,8 @@ extension AppDelegate: SignInViewControllerDelegate {
 
 extension AppDelegate: TeamSelectionViewControllerDelegate {
     func viewController(controller: TeamSelectionViewController, selectedTeam: Team) {
-        
         NSUserDefaults.standardUserDefaults().setObject(selectedTeam.name, forKey: "esa-current-team-name")
-        debugPrint("will change viewcontroller")
-        popover.contentViewController = EsaEntriesViewController(nibName: "EsaEntriesViewController", bundle: nil)
+        showEntriesPopover()
     }
 }
 
