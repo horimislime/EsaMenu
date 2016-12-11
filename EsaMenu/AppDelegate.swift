@@ -10,7 +10,7 @@ import Cocoa
 import OAuthSwift
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, TeamSelectionViewControllerDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
     private var statusItem: NSStatusItem!
@@ -27,11 +27,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, TeamSelectionViewControllerD
         
         popover.appearance = NSAppearance(named: NSAppearanceNameAqua)
         
-        if let _ = NSUserDefaults.standardUserDefaults().objectForKey("esa-current-team-name") {
+        if let _ = NSUserDefaults.standardUserDefaults().objectForKey("esa-credential") {
             popover.contentViewController = EsaEntriesViewController(nibName: "EsaEntriesViewController", bundle: nil)
             
         } else {
-            let controller = TeamSelectionViewController(nibName: "TeamSelectionViewController", bundle: nil)
+            let controller = SignInViewController(nibName: "SignInViewController", bundle: nil)
             controller?.delegate = self
             popover.contentViewController = controller
         }
@@ -52,22 +52,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, TeamSelectionViewControllerD
                 andSelector: #selector(handle(_:reply:)),
                 forEventClass: UInt32(kInternetEventClass),
                 andEventID: UInt32(kAEGetURL))
-        
-//        NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-credential")
-        guard let credential = NSUserDefaults.standardUserDefaults().objectForKey("esa-credential") else {
-            Esa.authorize { [weak self] result in
-                switch result {
-                case .Success(let credential):
-                    debugPrint("auth success")
-                    NSUserDefaults.standardUserDefaults().setObject(NSKeyedArchiver.archivedDataWithRootObject(credential), forKey: "esa-credential")
-                    self?.popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
-                    
-                case .Failure(let error):
-                    debugPrint("auth error: \(error.localizedDescription)")
-                }
-            }
-            return
-        }
         
         popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
     }
@@ -92,11 +76,42 @@ class AppDelegate: NSObject, NSApplicationDelegate, TeamSelectionViewControllerD
             popover.performClose(sender)
         }
     }
+}
+
+// MARK: SignInViewControllerDelegate
+
+extension AppDelegate: SignInViewControllerDelegate {
+    func signInFinished(controller: SignInViewController) {
+        
+        guard let button = statusItem.button else { return }
+        
+        let controller = TeamSelectionViewController(nibName: "TeamSelectionViewController", bundle: nil)
+        controller?.delegate = self
+        popover.contentViewController = controller
+        popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+    }
     
+    func signInFailed(controller: SignInViewController, error: NSError) {
+        
+    }
+}
+
+// MARK: TeamSelectionViewControllerDelegate
+
+extension AppDelegate: TeamSelectionViewControllerDelegate {
     func viewController(controller: TeamSelectionViewController, selectedTeam: Team) {
+        
         NSUserDefaults.standardUserDefaults().setObject(selectedTeam.name, forKey: "esa-current-team-name")
         debugPrint("will change viewcontroller")
         popover.contentViewController = EsaEntriesViewController(nibName: "EsaEntriesViewController", bundle: nil)
     }
 }
+
+
+
+
+
+
+
+
 
