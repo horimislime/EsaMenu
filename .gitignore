@@ -156,3 +156,5 @@ Pods/
 
 # Application specific
 EsaMenu/Environment.swift
+EsaMenu.app
+EsaMenu.app.dSYM.zip
