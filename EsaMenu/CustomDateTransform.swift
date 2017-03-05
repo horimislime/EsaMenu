@@ -9,8 +9,8 @@
 import Foundation
 import ObjectMapper
 
-var formatter: NSDateFormatter = {
-    let f = NSDateFormatter()
+var formatter: DateFormatter = {
+    let f = DateFormatter()
     f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZ"
     return f
 }()
@@ -20,16 +20,16 @@ class CustomDateTransform: TransformType {
     typealias Object = NSDate
     typealias JSON = String
     
-    func transformFromJSON(value: AnyObject?) -> NSDate? {
+    func transformFromJSON(_ value: Any?) -> NSDate? {
         if let timeString = value as? String {
-            return formatter.dateFromString(timeString)
+            return formatter.date(from: timeString) as NSDate?
         }
         return nil
     }
     
-    func transformToJSON(value: NSDate?) -> String? {
+    func transformToJSON(_ value: NSDate?) -> String? {
         if let date = value {
-            return formatter.stringFromDate(date)
+            return formatter.string(from: date as Date)
         }
         return nil
     }

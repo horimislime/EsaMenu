@@ -9,6 +9,7 @@
 import Alamofire
 import AlamofireObjectMapper
 import ObjectMapper
+import enum Result.Result
 
 final class FetchedEntries: Mappable {
     
@@ -19,9 +20,9 @@ final class FetchedEntries: Mappable {
         return posts.count
     }
     
-    required convenience init?(_ map: Map) {
+    required convenience init?(map: Map) {
         self.init()
-        mapping(map)
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -31,74 +32,70 @@ final class FetchedEntries: Mappable {
 
     
     func sorted() -> [Entry] {
-        return posts.sort({ $0.0.updatedAt > $0.1.updatedAt })
+        return posts.sorted { $0.0.updatedAt.timeIntervalSince1970 > $0.1.updatedAt.timeIntervalSince1970 }
     }
     
     func push(entries: [Entry]) {
         for entry in entries {
-            guard let targetIndex = posts.indexOf({ $0.number == entry.number }) else {
+            guard let targetIndex = posts.index(where: { $0.number == entry.number }) else {
                 posts.append(entry)
                 continue
             }
             
             if posts[targetIndex].updatedAt != entry.updatedAt {
-                posts.removeAtIndex(targetIndex)
+                posts.remove(at: targetIndex)
                 posts.append(entry)
             }
         }
     }
     
-    class func fetch(completion: Result<FetchedEntries, NSError> -> Void) {
-        Alamofire.request(Router.Posts(1))
-            .validate()
-            .responseObject { (response: FetchedEntries?, error: ErrorType?) in
-                if let model = response {
-                    completion(.Success(model))
-                    return
-                }
-                
-                completion(.Failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+    class func fetch(completion: @escaping (Result<FetchedEntries, NSError>) -> Void) {
+        Esa.shared.posts(page: 1) { result in
+            switch result {
+            case .success(let entries):
+                completion(.success(entries))
+            case .failure(_):
+                completion(.failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+            }
         }
     }
     
-    func fetchLatest(completion: NSError? -> Void) {
-        Alamofire.request(Router.Posts(1))
-            .validate()
-            .responseObject { [weak self] (response: FetchedEntries?, error: ErrorType?) in
-                
-                guard let strongSelf = self else { return }
-                
-                if let model = response {
-                    strongSelf.push(model.posts)
-                    completion(nil)
-                    return
-                }
+    func fetchLatest(completion: @escaping (NSError?) -> Void) {
+        
+        Esa.shared.posts(page: 1) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success(let entries):
+                strongSelf.push(entries: entries.posts)
+            case .failure(_):
                 completion(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil))
+            }
+            completion(nil)
         }
     }
     
-    func fetchMore(completion: NSError? -> Void) {
+    func fetchMore(completion: @escaping (NSError?) -> Void) {
         
         guard let nextPage = nextPage else {
             completion(nil)
             return
         }
         
-        Alamofire
-            .request(Router.Posts(nextPage))
-            .validate()
-            .responseObject { [weak self] (response: FetchedEntries?, error: ErrorType?) in
-                
-                guard let strongSelf = self else { return }
-                
-                if let model = response {
-                    strongSelf.posts.appendContentsOf(model.posts)
-                    strongSelf.nextPage = model.nextPage
-                    completion(nil)
-                    return
-                }
-                
+        Esa.shared.posts(page: nextPage) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success(let entries):
+                strongSelf.posts.append(contentsOf: entries.posts)
+                strongSelf.nextPage = entries.nextPage
+            case .failure(_):
                 completion((NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+            }
+            
+            completion(nil)
         }
     }
 }

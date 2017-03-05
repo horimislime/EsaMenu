@@ -17,26 +17,25 @@ class SignInViewController: NSViewController {
     
     weak var delegate: SignInViewControllerDelegate?
     
-    @IBAction func loginButtonClicked(sender: AnyObject) {
-        
-        Esa.authorize { [weak self] result in
+    @IBAction func loginButtonClicked(_ sender: NSButton) {
+        Esa.shared.authorize { [weak self] result in
             guard let strongSelf = self else { return }
             switch result {
-            case .Success(let credential):
+            case .success(let credential):
                 debugPrint("auth success")
-                NSUserDefaults.standardUserDefaults().setObject(NSKeyedArchiver.archivedDataWithRootObject(credential), forKey: "esa-credential")
+                UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: credential), forKey: "esa-credential")
                 
-                strongSelf.delegate?.signInFinished(strongSelf)
+                strongSelf.delegate?.signInFinished(controller: strongSelf)
                 
-            case .Failure(let error):
+            case .failure(let error):
                 debugPrint("auth error: \(error.localizedDescription)")
-                strongSelf.delegate?.signInFailed(strongSelf, error: error)
+                strongSelf.delegate?.signInFailed(controller: strongSelf, error: error as NSError)
             }
         }
     }
     
     
-    @IBAction func quitButtonClicked(sender: NSButton) {
-        NSApplication.sharedApplication().terminate(self)
+    @IBAction func quitButtonClicked(_ sender: NSButton) {
+        NSApplication.shared().terminate(self)
     }
 }

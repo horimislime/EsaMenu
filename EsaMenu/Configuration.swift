@@ -10,7 +10,7 @@ import Foundation
 
 class Configuration {
     
-    static let defaults = NSUserDefaults.standardUserDefaults()
+    static let defaults = UserDefaults.standard
     
     var token: String?
     var teamName: String?

@@ -9,34 +9,20 @@
 import Alamofire
 import AlamofireObjectMapper
 import ObjectMapper
+import enum Result.Result
 
 final class Team: Mappable {
     
     var name: String!
     var iconURLString: String!
     
-    required convenience init?(_ map: Map) {
+    required convenience init?(map: Map) {
         self.init()
-        mapping(map)
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
         name <- map["name"]
         iconURLString <- map["icon"]
-    }
-    
-    class func list(completion: Result<[Team], NSError> -> Void) {
-        Alamofire
-            .request(Router.Teams)
-            .validate()
-            .responseArray("teams") { (response: [Team]?, error: ErrorType?) in
-                
-                if let model = response {
-                    completion(.Success(model))
-                    return
-                }
-                
-                completion(.Failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
-        }
     }
 }
