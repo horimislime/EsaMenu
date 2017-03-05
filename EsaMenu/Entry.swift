@@ -9,6 +9,7 @@
 import Alamofire
 import AlamofireObjectMapper
 import ObjectMapper
+import enum Result.Result
 
 class EntryAuthor: Mappable {
     
@@ -20,9 +21,9 @@ class EntryAuthor: Mappable {
         return NSURL(string: iconUrlString)!
     }
     
-    required convenience init?(_ map: Map) {
+    required convenience init?(map: Map) {
         self.init()
-        mapping(map)
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -49,9 +50,9 @@ class Entry : Mappable {
     var updatedBy: EntryAuthor!
     
     
-    required convenience init?(_ map: Map) {
+    required convenience init?(map: Map) {
         self.init()
-        mapping(map)
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -67,17 +68,17 @@ class Entry : Mappable {
         updatedBy <- map["updated_by"]
     }
     
-    class func list(completion: Result<[Entry], NSError> -> Void) {
+    class func list(completion: @escaping (Result<[Entry], NSError>) -> Void) {
         Alamofire.request(Router.Posts(1))
             .validate()
-            .responseArray("posts") { (response: [Entry]?, error: ErrorType?) in
+            .responseArray(keyPath: "posts") { (response: DataResponse<[Entry]>) in
                 
-                if let model = response {
-                    completion(.Success(model))
-                    return
+                switch response.result {
+                case .success(let entries):
+                    completion(.success(entries))
+                case .failure(_):
+                    completion(.failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
                 }
-                
-                completion(.Failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
         }
     }
 }

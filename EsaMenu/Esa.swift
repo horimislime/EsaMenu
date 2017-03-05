@@ -7,27 +7,33 @@
 //
 
 import Alamofire
+import AlamofireObjectMapper
 import OAuthSwift
 import ObjectMapper
+import enum Result.Result
+
+class AccessTokenAdapter: RequestAdapter {
+    private let accessToken: String
+    
+    init(accessToken: String) {
+        self.accessToken = accessToken
+    }
+    
+    func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
+        var urlRequest = urlRequest
+        
+        if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix("https://api.esa.io") {
+            urlRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        }
+        
+        return urlRequest
+    }
+}
 
 enum Router: URLRequestConvertible {
     
-    static let baseURLString = "https://api.esa.io/v1"
-    
-    case Posts(Int)
-    case Teams
-    
-    var method: Alamofire.Method {
-        switch self {
-        case .Posts: return .GET
-        case .Teams: return .GET
-        }
-    }
-    
-    var URLRequest: NSMutableURLRequest {
+    func asURLRequest() throws -> URLRequest {
         
-        
-
         let result: (path: String, parameters: [String: AnyObject]) = {
             switch self {
             case .Posts(let page):
@@ -38,17 +44,29 @@ enum Router: URLRequestConvertible {
             }
         }()
         
-        let request = NSMutableURLRequest(url: URL(string: Router.baseURLString + result.path)!)
+        var request = URLRequest(url: URL(string: Router.baseURLString + result.path)!)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPMethod = method.rawValue
+        request.httpMethod = method.rawValue
+        
+        
+//        if let raw = UserDefaults.standard.object(forKey: "esa-credential") as? NSData, let credential = NSKeyedUnarchiver.unarchiveObject(with: raw as Data) as? OAuthSwiftCredential {
+//            request.setValue("Bearer \(credential.oauth_token)", forHTTPHeaderField: "Authorization")
+//        }
+        
+        return try URLEncoding.default.encode(request, with: result.parameters)
+    }
 
-        
-        if let raw = UserDefaults.standard.object(forKey: "esa-credential") as? NSData, let credential = NSKeyedUnarchiver.unarchiveObject(with: raw as Data) as? OAuthSwiftCredential {
-            request.setValue("Bearer \(credential.oauth_token)", forHTTPHeaderField: "Authorization")
+    
+    static let baseURLString = "https://api.esa.io/v1"
+    
+    case Posts(Int)
+    case Teams
+    
+    var method: HTTPMethod {
+        switch self {
+        case .Posts: return .get
+        case .Teams: return .get
         }
-        
-        let encoding = Alamofire.ParameterEncoding.URL
-        return encoding.encode(request, parameters: result.parameters).0
     }
 }
 
@@ -60,18 +78,37 @@ let oauth: OAuth2Swift = OAuth2Swift(
     responseType: "code"
 )
 
+fileprivate let sessionManager: SessionManager = {
+    let configuration = URLSessionConfiguration.default
+    configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+    
+    return SessionManager(configuration: configuration)
+}()
+
 final class Esa {
-    class func authorize(completion: Result<OAuthSwiftCredential, NSError> -> Void) {
-        oauth.authorizeWithCallbackURL(NSURL(string: "esamenuapp://oauth-callback")!,
-                                       scope: "read", state: "app-secret",
-                                       success: { credential, response, parameters in
-            
+    
+    class func authorize(completion: @escaping (Result<OAuthSwiftCredential, OAuthSwiftError>) -> Void) {
+        
+        oauth.authorize(withCallbackURL: "esamenuapp://oauth-callback", scope: "read", state: "app-secret", parameters: [:], headers: nil,  success: { (credential: OAuthSwiftCredential, response: OAuthSwiftResponse?, params: Parameters) in
             debugPrint("credential = \(credential)")
-            completion(.Success(credential))
+            sessionManager.adapter = AccessTokenAdapter(accessToken: credential.oauthToken)
+            completion(.success(credential))
+
+        }) { (error: OAuthSwiftError) in
+            completion(.failure(error))
+        }
+    }
+    
+    class func list(completion: @escaping (Result<[Team], NSError>) -> Void) {
+        sessionManager.request(Router.Teams).validate().responseArray(keyPath: "teams") { (response: DataResponse<[Team]>) in
             
-            }, failure: { error in
-                completion(.Failure(error))
-        })
+            switch response.result {
+            case .success(let teams):
+                completion(.success(teams))
+            case .failure(_):
+                completion(.failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+            }
+        }
     }
 }
 

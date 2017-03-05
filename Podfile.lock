@@ -7,6 +7,7 @@ PODS:
   - MTDates (1.0.3)
   - OAuthSwift (1.1.1)
   - ObjectMapper (2.2.5)
+  - Result (3.2.1)
 
 DEPENDENCIES:
   - Alamofire (= 4.4.0)
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - MTDates
   - OAuthSwift (= 1.1.1)
   - ObjectMapper (= 2.2.5)
+  - Result (= 3.2.1)
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
@@ -23,7 +25,8 @@ SPEC CHECKSUMS:
   MTDates: c65affdfb7b34001c5c9e3fe0beac4b1b8334a58
   OAuthSwift: 6e3a103b3e5639411769cc7e199ec7e14bd1547f
   ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
+  Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
 
-PODFILE CHECKSUM: c2007a26e933b10b0144a4fff1fed6d1b111ed7f
+PODFILE CHECKSUM: b283e32ef83b914d628dc2846e12ae44e18c84a6
 
 COCOAPODS: 1.1.1

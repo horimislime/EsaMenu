@@ -23,16 +23,16 @@ final class EsaEntryCell: NSTableCellView {
     override func awakeFromNib() {
         super.awakeFromNib()
         wantsLayer = true
-        layer?.backgroundColor = NSColor.whiteColor().CGColor
-        entryCategoryField.backgroundColor = NSColor.clearColor()
+        layer?.backgroundColor = NSColor.white.cgColor
+        entryCategoryField.backgroundColor = NSColor.clear
         entryCategoryField.textColor = NSColor(type: .darkGray)
-        entryTitleField.backgroundColor = NSColor.clearColor()
+        entryTitleField.backgroundColor = NSColor.clear
         userImageView.layer?.cornerRadius = userImageView.frame.width / 2
     }
     
     func configure(entry: Entry) {
         
-        userImageView.image = NSImage(contentsOfURL: entry.updatedBy.iconURL)
+        userImageView.image = NSImage(contentsOf: entry.updatedBy.iconURL as URL)
         
         if entry.wip {
             self.alphaValue = 0.5
@@ -42,7 +42,7 @@ final class EsaEntryCell: NSTableCellView {
         }
         
         entryTitleField.stringValue = entry.name
-        entryTitleField.editable = false
+        entryTitleField.isEditable = false
         
         if let category = entry.category {
             entryCategoryField.stringValue = category
@@ -52,19 +52,19 @@ final class EsaEntryCell: NSTableCellView {
         }
         
         
-        let days = entry.updatedAt.mt_daysUntilDate(NSDate())
+        let days = entry.updatedAt.mt_days(until: NSDate() as Date!)
         if days > 3 {
-            let formatter = NSDateFormatter()
-            formatter.dateStyle = .ShortStyle
-            lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(formatter.stringFromDate(entry.updatedAt))"
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(formatter.string(from: entry.updatedAt as Date))"
         } else if days > 0 {
             lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(days)d"
-        } else if entry.updatedAt.mt_hoursUntilDate(NSDate()) > 0 {
-            lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(NSDate().mt_hoursSinceDate(entry.updatedAt))h"
-        } else if entry.updatedAt.mt_minutesUntilDate(NSDate()) > 0 {
-            lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(NSDate().mt_minutesSinceDate(entry.updatedAt))m"
+        } else if entry.updatedAt.mt_hours(until: NSDate() as Date!) > 0 {
+            lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(NSDate().mt_hours(since: entry.updatedAt as Date!))h"
+        } else if entry.updatedAt.mt_minutes(until: NSDate() as Date!) > 0 {
+            lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(NSDate().mt_minutes(since: entry.updatedAt as Date!))m"
         } else {
-            lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(NSDate().mt_secondsSinceDate(entry.updatedAt))s"
+            lastUpdateLabel.stringValue = "By \(entry.updatedBy.screenName) \(NSDate().mt_seconds(since: entry.updatedAt as Date!))s"
         }
     }
 }

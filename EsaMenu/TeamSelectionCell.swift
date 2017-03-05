@@ -14,7 +14,7 @@ class TeamSelectionCell: NSTableCellView {
     @IBOutlet weak var teamNameLabel: NSTextField!
     
     func configure(team: Team) {
-        teamImageView.image = NSImage(contentsOfURL: NSURL(string: team.iconURLString)!)
+        teamImageView.image = NSImage(contentsOf: URL(string: team.iconURLString)!)
         teamNameLabel.stringValue = team.name
     }
 }

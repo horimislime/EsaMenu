@@ -21,7 +21,7 @@ extension NSView {
         
         wantsLayer = true
         let border = CALayer()
-        border.backgroundColor = color.CGColor
+        border.backgroundColor = color.cgColor
         border.name = side.rawValue
         
         layer?.sublayers?

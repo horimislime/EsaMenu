@@ -11,6 +11,7 @@ target 'EsaMenu' do
   pod 'MTDates'
   pod 'OAuthSwift', '1.1.1'
   pod 'DateTools'
+  pod 'Result', '3.2.1'
 
   target 'EsaMenuTests' do
     inherit! :search_paths

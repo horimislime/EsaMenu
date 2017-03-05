@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let button = statusItem.button else { return }
         
         button.image = NSImage(named: "StatusBarButtonImage")
-        button.action = #selector(statusBarButtonTapped(_:))
+        button.action = #selector(statusBarButtonTapped(sender:))
         
         popover.appearance = NSAppearance(named: NSAppearanceNameAqua)
         
@@ -34,20 +34,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             showSignInPopover()
         }
         
-        monitor = EventMonitor(mask: [.LeftMouseDownMask, .RightMouseDownMask]) { [weak self] event in
+        monitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
             
             guard let strongSelf = self else { return }
-            if strongSelf.popover.shown {
+            if strongSelf.popover.isShown {
                 strongSelf.popover.performClose(event)
             }
         }
         monitor?.start()
         
         NSAppleEventManager
-            .sharedAppleEventManager()
+            .shared()
             .setEventHandler(
                 self,
-                andSelector: #selector(handle(_:reply:)),
+                andSelector: #selector(handle(event:reply:)),
                 forEventClass: UInt32(kInternetEventClass),
                 andEventID: UInt32(kAEGetURL))
         
@@ -58,10 +58,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func handle(event: NSAppleEventDescriptor, reply: NSAppleEventDescriptor) {
         
         let urlString = event.paramDescriptor(forKeyword: UInt32(keyDirectObject))?.stringValue
-        guard let s = urlString, let url = NSURL(string: s) else { return }
+        guard let s = urlString, let url = URL(string: s) else { return }
         
         if url.scheme == "esamenuapp" && url.host == "oauth-callback" {
-            OAuth2Swift.handleOpenURL(url)
+            OAuth2Swift.handle(url: url)
         }
     }
 

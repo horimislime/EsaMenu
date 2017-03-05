@@ -17,7 +17,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     @IBOutlet weak var settingsButton: NSButton!
     @IBOutlet weak var footerView: NSView! {
         didSet {
-            footerView.addBorder(NSColor.lightGrayColor(), width: 0.5, side: .bottom)
+            footerView.addBorder(color: NSColor.lightGray, width: 0.5, side: .bottom)
         }
     }
     
@@ -25,26 +25,26 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     @IBAction func settingsButtonTapped(sender: AnyObject) {
         let menu = NSMenu(title: "settings")
-        menu.insertItemWithTitle("Sign out", action: #selector(signOutMenuTapped(_:)), keyEquivalent: "", atIndex: 0)
-        menu.insertItemWithTitle("Quit", action: #selector(quitMenuTapped(_:)), keyEquivalent: "q", atIndex: 1)
-        NSMenu.popUpContextMenu(menu, withEvent: NSApplication.sharedApplication().currentEvent!, forView: settingsButton)
+        menu.insertItem(withTitle: "Sign out", action: #selector(signOutMenuTapped(sender:)), keyEquivalent: "", at: 0)
+        menu.insertItem(withTitle: "Quit", action: #selector(quitMenuTapped(sender:)), keyEquivalent: "q", at: 1)
+        NSMenu.popUpContextMenu(menu, with: NSApplication.shared().currentEvent!, for: settingsButton)
     }
     
     func signOutMenuTapped(sender: NSMenu) {
         timer?.invalidate()
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-credential")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-current-team-name")
-        (NSApplication.sharedApplication().delegate as? AppDelegate)?.showSignInPopover()
+        UserDefaults.standard.removeObject(forKey: "esa-credential")
+        UserDefaults.standard.removeObject(forKey: "esa-current-team-name")
+        (NSApplication.shared().delegate as? AppDelegate)?.showSignInPopover()
     }
     
     func quitMenuTapped(sender: NSMenu) {
         Swift.debugPrint("quitMenuTapped")
-        NSApplication.sharedApplication().terminate(sender)
+        NSApplication.shared().terminate(sender)
     }
     
     private var entries = FetchedEntries()
-    private weak var timer: NSTimer?
-    private weak var lastUpdateTimer: NSTimer?
+    private weak var timer: Timer?
+    private weak var lastUpdateTimer: Timer?
     
     private var updating = false
     private var lastUpdated: NSDate? = nil
@@ -54,20 +54,20 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         super.viewDidLoad()
         view.wantsLayer = true
         view.layer?.cornerRadius = 4
-        view.layer?.backgroundColor = NSColor.whiteColor().CGColor
-        tableView.registerNib(NSNib(nibNamed: "EsaEntryCell", bundle: nil), forIdentifier: "EsaEntryCellIdentifier")
-        tableView.registerNib(NSNib(nibNamed: "EsaEntryLoadCell", bundle: nil), forIdentifier: "EsaEntryLoadCellIdentifier")
-        tableView.setDelegate(self)
-        tableView.setDataSource(self)
-        tableView.selectionHighlightStyle = .None
-        tableView.focusRingType = .None
-        tableView.gridColor = NSColor.clearColor()
+        view.layer?.backgroundColor = NSColor.white.cgColor
+        tableView.register(NSNib(nibNamed: "EsaEntryCell", bundle: nil), forIdentifier: "EsaEntryCellIdentifier")
+        tableView.register(NSNib(nibNamed: "EsaEntryLoadCell", bundle: nil), forIdentifier: "EsaEntryLoadCellIdentifier")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.selectionHighlightStyle = .none
+        tableView.focusRingType = .none
+        tableView.gridColor = NSColor.clear
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(scrollViewDidScroll(_:)), name: NSViewBoundsDidChangeNotification, object: scrollView.contentView)
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollViewDidScroll(notification:)), name: NSNotification.Name.NSViewBoundsDidChange, object: scrollView.contentView)
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(updatePosts(_:)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updatePosts(timer:)), userInfo: nil, repeats: true)
         timer?.fire()
-        lastUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: #selector(reloadLastUpdatedLabel), userInfo: nil, repeats: true)
+        lastUpdateTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(reloadLastUpdatedLabel), userInfo: nil, repeats: true)
         lastUpdateTimer?.fire()
     }
     
@@ -82,12 +82,12 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     deinit {
         timer?.invalidate()
         lastUpdateTimer?.invalidate()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func updatePosts(timer: NSTimer) {
+    func updatePosts(timer: Timer) {
         Swift.debugPrint("timer fired")
-        progress.hidden = false
+        progress.isHidden = false
         progress.startAnimation(self)
         tableView.reloadData()
         
@@ -95,24 +95,24 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
             FetchedEntries.fetch() { [weak self] result in
                 guard let strongSelf = self else { return }
                 switch result {
-                case .Success(let entries):
+                case .success(let entries):
                     Swift.debugPrint("success")
                     strongSelf.entries = entries
                     strongSelf.tableView.reloadData()
                     strongSelf.lastUpdated = NSDate()
                     strongSelf.reloadLastUpdatedLabel()
                     
-                case .Failure(_):
+                case .failure(_):
                     Swift.debugPrint("error")
                 }
-                strongSelf.progress.hidden = true
+                strongSelf.progress.isHidden = true
             }
             
         } else {
             entries.fetchLatest { [weak self] error in
                 guard let strongSelf = self else { return }
                 strongSelf.tableView.reloadData()
-                strongSelf.progress.hidden = true
+                strongSelf.progress.isHidden = true
                 strongSelf.lastUpdated = NSDate()
             }
         }
@@ -141,30 +141,30 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
             return 0
         }
         
-        tableView.gridColor = (entries.count == 0) ? NSColor.clearColor() : NSColor(type: .lightGray)
+        tableView.gridColor = (entries.count == 0) ? NSColor.clear : NSColor(type: .lightGray)
         return entries.count + 1
     }
     
-    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        if row == (self.numberOfRowsInTableView(tableView) - 1) {
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        if row == (self.numberOfRowsInTableView(tableView: tableView) - 1) {
             return 30
         }
-        let cell = tableView.makeViewWithIdentifier("EsaEntryCellIdentifier", owner: self) as! EsaEntryCell
-        cell.configure(entries.sorted()[row])
+        let cell = tableView.make(withIdentifier: "EsaEntryCellIdentifier", owner: self) as! EsaEntryCell
+        cell.configure(entry: entries.sorted()[row])
         cell.layoutSubtreeIfNeeded()
         return cell.frame.height
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        if row == (self.numberOfRowsInTableView(tableView) - 1) {
-            let cell = tableView.makeViewWithIdentifier("EsaEntryLoadCellIdentifier", owner: self) as! EsaEntryLoadCell
+        if row == (self.numberOfRowsInTableView(tableView: tableView) - 1) {
+            let cell = tableView.make(withIdentifier: "EsaEntryLoadCellIdentifier", owner: self) as! EsaEntryLoadCell
             cell.progress.startAnimation(self)
             return cell
         }
         
-        let cell = tableView.makeViewWithIdentifier("EsaEntryCellIdentifier", owner: self) as! EsaEntryCell
-        cell.configure(entries.sorted()[row])
+        let cell = tableView.make(withIdentifier: "EsaEntryCellIdentifier", owner: self) as! EsaEntryCell
+        cell.configure(entry: entries.sorted()[row])
         return cell
     }
     
@@ -172,16 +172,16 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         
         if tableView.selectedRow == -1 { return true }
         
-        let cell = tableView.viewAtColumn(0, row: tableView.selectedRow, makeIfNecessary: true)
-        cell!.layer!.backgroundColor = NSColor.clearColor().CGColor
+        let cell = tableView.view(atColumn: 0, row: tableView.selectedRow, makeIfNecessary: true)
+        cell!.layer!.backgroundColor = NSColor.clear.cgColor
         return true
     }
     
-    func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-        NSWorkspace.sharedWorkspace().openURL(NSURL(string: entries.sorted()[row].url)!)
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        NSWorkspace.shared().open(NSURL(string: entries.sorted()[row].url)! as URL)
         
-        let cell = tableView.viewAtColumn(0, row: row, makeIfNecessary: true)
-        cell!.layer!.backgroundColor = NSColor(type: .lightGray).CGColor
+        let cell = tableView.view(atColumn: 0, row: row, makeIfNecessary: true)
+        cell!.layer!.backgroundColor = NSColor(type: .lightGray).cgColor
         return true
     }
 }

@@ -23,37 +23,37 @@ final class TeamSelectionViewController: NSViewController, NSTableViewDelegate, 
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        tableView.registerNib(NSNib(nibNamed: "TeamSelectionCell", bundle: nil), forIdentifier: "TeamSelectionCellIdentifier")
-        tableView.setDelegate(self)
-        tableView.setDataSource(self)
-        tableView.focusRingType = .None
+        tableView.register(NSNib(nibNamed: "TeamSelectionCell", bundle: nil), forIdentifier: "TeamSelectionCellIdentifier")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.focusRingType = .none
         
         Team.list { [weak self] result in
             guard let strongSelf = self else { return }
             switch result {
-            case .Success(let teams):
+            case .success(let teams):
                 strongSelf.teams = teams
                 strongSelf.tableView.reloadData()
-            case .Failure(_):()
+            case .failure(_):()
             }
         }
     }
     
     @IBAction func settingsButtonTapped(sender: NSButton) {
         let menu = NSMenu(title: "settings")
-        menu.insertItemWithTitle("Sign out", action: #selector(signOutMenuTapped(_:)), keyEquivalent: "", atIndex: 0)
-        menu.insertItemWithTitle("Quit", action: #selector(quitMenuTapped(_:)), keyEquivalent: "q", atIndex: 1)
-        NSMenu.popUpContextMenu(menu, withEvent: NSApplication.sharedApplication().currentEvent!, forView: settingsButton)
+        menu.insertItem(withTitle: "Sign out", action: #selector(signOutMenuTapped(sender:)), keyEquivalent: "", at: 0)
+        menu.insertItem(withTitle: "Quit", action: #selector(quitMenuTapped(sender:)), keyEquivalent: "q", at: 1)
+        NSMenu.popUpContextMenu(menu, with: NSApplication.shared().currentEvent!, for: settingsButton)
     }
     
     func signOutMenuTapped(sender: NSMenu) {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-credential")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("esa-current-team-name")
-        (NSApplication.sharedApplication().delegate as? AppDelegate)?.showSignInPopover()
+        UserDefaults.standard.removeObject(forKey: "esa-credential")
+        UserDefaults.standard.removeObject(forKey: "esa-current-team-name")
+        (NSApplication.shared().delegate as? AppDelegate)?.showSignInPopover()
     }
     
     func quitMenuTapped(sender: NSMenu) {
-        NSApplication.sharedApplication().terminate(sender)
+        NSApplication.shared().terminate(sender)
     }
     
     
@@ -61,17 +61,17 @@ final class TeamSelectionViewController: NSViewController, NSTableViewDelegate, 
         return teams.count
     }
     
-    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 62
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeViewWithIdentifier("TeamSelectionCellIdentifier", owner: self) as! TeamSelectionCell
-        cell.configure(teams[row])
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.make(withIdentifier: "TeamSelectionCellIdentifier", owner: self) as! TeamSelectionCell
+        cell.configure(team: teams[row])
         return cell
     }
     
-    func tableViewSelectionDidChange(notification: NSNotification) {
-        delegate?.viewController(self, selectedTeam: teams[tableView.selectedRow])
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        delegate?.viewController(controller: self, selectedTeam: teams[tableView.selectedRow])
     }
 }

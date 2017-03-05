@@ -9,6 +9,7 @@
 import Alamofire
 import AlamofireObjectMapper
 import ObjectMapper
+import enum Result.Result
 
 final class FetchedEntries: Mappable {
     
@@ -31,7 +32,7 @@ final class FetchedEntries: Mappable {
 
     
     func sorted() -> [Entry] {
-        return posts.sort(by: { $0.0.updatedAt > $0.1.updatedAt })
+        return posts.sorted { $0.0.updatedAt.timeIntervalSince1970 > $0.1.updatedAt.timeIntervalSince1970 }
     }
     
     func push(entries: [Entry]) {
@@ -48,32 +49,34 @@ final class FetchedEntries: Mappable {
         }
     }
     
-    class func fetch(completion: Result<FetchedEntries, NSError> -> Void) {
+    class func fetch(completion: @escaping (Result<FetchedEntries, NSError>) -> Void) {
         Alamofire.request(Router.Posts(1))
             .validate()
-            .responseObject { (response: FetchedEntries?, error: Error?) in
-                if let model = response {
-                    completion(.Success(model))
-                    return
-                }
+            .responseObject { (response: DataResponse<FetchedEntries>) in
                 
-                completion(.Failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+                switch response.result {
+                case .success(let entries):
+                    completion(.success(entries))
+                case .failure(_):
+                    completion(.failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+                }
         }
     }
     
     func fetchLatest(completion: @escaping (NSError?) -> Void) {
         Alamofire.request(Router.Posts(1))
             .validate()
-            .responseObject { [weak self] (response: FetchedEntries?, error: Error?) in
-                
+            .responseObject { [weak self] (response: DataResponse<FetchedEntries>) in
+        
                 guard let strongSelf = self else { return }
                 
-                if let model = response {
-                    strongSelf.push(model.posts)
-                    completion(nil)
-                    return
+                switch response.result {
+                case .success(let entries):
+                    strongSelf.push(entries: entries.posts)
+                case .failure(_):
+                    completion(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil))
                 }
-                completion(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil))
+                completion(nil)
         }
     }
     
@@ -87,18 +90,19 @@ final class FetchedEntries: Mappable {
         Alamofire
             .request(Router.Posts(nextPage))
             .validate()
-            .responseObject { [weak self] (response: FetchedEntries?, error: Error?) in
+            .responseObject { [weak self] (response: DataResponse<FetchedEntries>) in
                 
                 guard let strongSelf = self else { return }
                 
-                if let model = response {
-                    strongSelf.posts.appendContentsOf(model.posts)
-                    strongSelf.nextPage = model.nextPage
-                    completion(nil)
-                    return
+                switch response.result {
+                case .success(let entries):
+                    strongSelf.posts.append(contentsOf: entries.posts)
+                    strongSelf.nextPage = entries.nextPage
+                case .failure(_):
+                    completion((NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
                 }
                 
-                completion((NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+                completion(nil)
         }
     }
 }

@@ -15,11 +15,11 @@ extension NSAttributedString {
         let range = NSRange(location: 0, length: text.characters.count)
         
         attr.beginEditing()
-        attr.addAttribute(NSLinkAttributeName, value: link.absoluteURL, range: range)
+        attr.addAttribute(NSLinkAttributeName, value: link.absoluteURL ?? "", range: range)
         attr.addAttribute(NSForegroundColorAttributeName,
-                                value: NSColor.blueColor(), range: range)
+                                value: NSColor.blue, range: range)
         attr.addAttribute(NSUnderlineStyleAttributeName,
-                                value: NSUnderlineStyle.StyleSingle.rawValue, range: range)
+                                value: NSUnderlineStyle.styleSingle.rawValue, range: range)
         attr.endEditing()
         
         return attr
