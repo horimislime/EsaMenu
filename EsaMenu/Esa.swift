@@ -31,19 +31,19 @@ enum Router: URLRequestConvertible {
         let result: (path: String, parameters: [String: AnyObject]) = {
             switch self {
             case .Posts(let page):
-                let team = NSUserDefaults.standardUserDefaults().objectForKey("esa-current-team-name") as! String
-                return ("/teams/\(team)/posts", ["page": page, "per_page": 50])
+                let team = UserDefaults.standard.object(forKey: "esa-current-team-name") as! String
+                return ("/teams/\(team)/posts", ["page": page as AnyObject, "per_page": 50 as AnyObject])
             case .Teams:
                 return ("/teams", [:])
             }
         }()
         
-        let request = NSMutableURLRequest(URL: NSURL(string: Router.baseURLString + result.path)!)
+        let request = NSMutableURLRequest(url: URL(string: Router.baseURLString + result.path)!)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.HTTPMethod = method.rawValue
 
         
-        if let raw = NSUserDefaults.standardUserDefaults().objectForKey("esa-credential") as? NSData, credential = NSKeyedUnarchiver.unarchiveObjectWithData(raw) {
+        if let raw = UserDefaults.standard.object(forKey: "esa-credential") as? NSData, let credential = NSKeyedUnarchiver.unarchiveObject(with: raw as Data) as? OAuthSwiftCredential {
             request.setValue("Bearer \(credential.oauth_token)", forHTTPHeaderField: "Authorization")
         }
         

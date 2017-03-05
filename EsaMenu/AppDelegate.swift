@@ -19,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
-        statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
+        statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
         guard let button = statusItem.button else { return }
         
         button.image = NSImage(named: "StatusBarButtonImage")
@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         popover.appearance = NSAppearance(named: NSAppearanceNameAqua)
         
-        if let _ = NSUserDefaults.standardUserDefaults().objectForKey("esa-credential"), let _ = NSUserDefaults.standardUserDefaults().objectForKey("esa-current-team-name") {
+        if let _ = UserDefaults.standard.object(forKey: "esa-credential"), let _ = UserDefaults.standard.object(forKey: "esa-current-team-name") {
             showEntriesPopover()
             
         } else {
@@ -51,14 +51,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 forEventClass: UInt32(kInternetEventClass),
                 andEventID: UInt32(kAEGetURL))
         
-        popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+        popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
     }
     
     
     func handle(event: NSAppleEventDescriptor, reply: NSAppleEventDescriptor) {
         
-        let urlString = event.paramDescriptorForKeyword(UInt32(keyDirectObject))?.stringValue
-        guard let s = urlString, url = NSURL(string: s) else { return }
+        let urlString = event.paramDescriptor(forKeyword: UInt32(keyDirectObject))?.stringValue
+        guard let s = urlString, let url = NSURL(string: s) else { return }
         
         if url.scheme == "esamenuapp" && url.host == "oauth-callback" {
             OAuth2Swift.handleOpenURL(url)
@@ -67,8 +67,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func statusBarButtonTapped(sender: AnyObject) {
         
-        if let button = statusItem.button where !popover.shown {
-            popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+        if let button = statusItem.button, !popover.isShown {
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
             
         } else {
             popover.performClose(sender)
@@ -81,8 +81,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         controller?.delegate = self
         popover.contentViewController = controller
         
-        if let button = statusItem.button where !popover.shown {
-            popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+        if let button = statusItem.button, !popover.isShown {
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         }
     }
     
@@ -92,15 +92,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         controller?.delegate = self
         popover.contentViewController = controller
         
-        if let button = statusItem.button where !popover.shown {
-            popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+        if let button = statusItem.button, !popover.isShown {
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         }
     }
     
     func showEntriesPopover() {
         popover.contentViewController = EsaEntriesViewController(nibName: "EsaEntriesViewController", bundle: nil)
-        if let button = statusItem.button where !popover.shown {
-            popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: .MinY)
+        if let button = statusItem.button, !popover.isShown {
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         }
     }
 }
@@ -121,7 +121,7 @@ extension AppDelegate: SignInViewControllerDelegate {
 
 extension AppDelegate: TeamSelectionViewControllerDelegate {
     func viewController(controller: TeamSelectionViewController, selectedTeam: Team) {
-        NSUserDefaults.standardUserDefaults().setObject(selectedTeam.name, forKey: "esa-current-team-name")
+        UserDefaults.standard.set(selectedTeam.name, forKey: "esa-current-team-name")
         showEntriesPopover()
     }
 }

@@ -19,9 +19,9 @@ final class FetchedEntries: Mappable {
         return posts.count
     }
     
-    required convenience init?(_ map: Map) {
+    required convenience init?(map: Map) {
         self.init()
-        mapping(map)
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -31,18 +31,18 @@ final class FetchedEntries: Mappable {
 
     
     func sorted() -> [Entry] {
-        return posts.sort({ $0.0.updatedAt > $0.1.updatedAt })
+        return posts.sort(by: { $0.0.updatedAt > $0.1.updatedAt })
     }
     
     func push(entries: [Entry]) {
         for entry in entries {
-            guard let targetIndex = posts.indexOf({ $0.number == entry.number }) else {
+            guard let targetIndex = posts.index(where: { $0.number == entry.number }) else {
                 posts.append(entry)
                 continue
             }
             
             if posts[targetIndex].updatedAt != entry.updatedAt {
-                posts.removeAtIndex(targetIndex)
+                posts.remove(at: targetIndex)
                 posts.append(entry)
             }
         }
@@ -51,7 +51,7 @@ final class FetchedEntries: Mappable {
     class func fetch(completion: Result<FetchedEntries, NSError> -> Void) {
         Alamofire.request(Router.Posts(1))
             .validate()
-            .responseObject { (response: FetchedEntries?, error: ErrorType?) in
+            .responseObject { (response: FetchedEntries?, error: Error?) in
                 if let model = response {
                     completion(.Success(model))
                     return
@@ -61,10 +61,10 @@ final class FetchedEntries: Mappable {
         }
     }
     
-    func fetchLatest(completion: NSError? -> Void) {
+    func fetchLatest(completion: @escaping (NSError?) -> Void) {
         Alamofire.request(Router.Posts(1))
             .validate()
-            .responseObject { [weak self] (response: FetchedEntries?, error: ErrorType?) in
+            .responseObject { [weak self] (response: FetchedEntries?, error: Error?) in
                 
                 guard let strongSelf = self else { return }
                 
@@ -77,7 +77,7 @@ final class FetchedEntries: Mappable {
         }
     }
     
-    func fetchMore(completion: NSError? -> Void) {
+    func fetchMore(completion: @escaping (NSError?) -> Void) {
         
         guard let nextPage = nextPage else {
             completion(nil)
@@ -87,7 +87,7 @@ final class FetchedEntries: Mappable {
         Alamofire
             .request(Router.Posts(nextPage))
             .validate()
-            .responseObject { [weak self] (response: FetchedEntries?, error: ErrorType?) in
+            .responseObject { [weak self] (response: FetchedEntries?, error: Error?) in
                 
                 guard let strongSelf = self else { return }
                 
