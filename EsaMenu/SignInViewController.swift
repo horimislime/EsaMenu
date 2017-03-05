@@ -17,9 +17,8 @@ class SignInViewController: NSViewController {
     
     weak var delegate: SignInViewControllerDelegate?
     
-    @IBAction func loginButtonClicked(sender: AnyObject) {
-        
-        Esa.authorize { [weak self] result in
+    @IBAction func loginButtonClicked(_ sender: NSButton) {
+        Esa.shared.authorize { [weak self] result in
             guard let strongSelf = self else { return }
             switch result {
             case .success(let credential):
@@ -36,7 +35,7 @@ class SignInViewController: NSViewController {
     }
     
     
-    @IBAction func quitButtonClicked(sender: NSButton) {
+    @IBAction func quitButtonClicked(_ sender: NSButton) {
         NSApplication.shared().terminate(self)
     }
 }

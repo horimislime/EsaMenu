@@ -25,19 +25,4 @@ final class Team: Mappable {
         name <- map["name"]
         iconURLString <- map["icon"]
     }
-    
-    class func list(completion: @escaping (Result<[Team], NSError>) -> Void) {
-        Alamofire
-            .request(Router.Teams)
-            .validate()
-            .responseArray(keyPath: "teams") { (response: DataResponse<[Team]>) in
-                
-                switch response.result {
-                case .success(let teams):
-                    completion(.success(teams))
-                case .failure(_):
-                    completion(.failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
-                }
-        }
-    }
 }

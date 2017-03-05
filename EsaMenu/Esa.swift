@@ -48,11 +48,6 @@ enum Router: URLRequestConvertible {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = method.rawValue
         
-        
-//        if let raw = UserDefaults.standard.object(forKey: "esa-credential") as? NSData, let credential = NSKeyedUnarchiver.unarchiveObject(with: raw as Data) as? OAuthSwiftCredential {
-//            request.setValue("Bearer \(credential.oauth_token)", forHTTPHeaderField: "Authorization")
-//        }
-        
         return try URLEncoding.default.encode(request, with: result.parameters)
     }
 
@@ -78,20 +73,35 @@ let oauth: OAuth2Swift = OAuth2Swift(
     responseType: "code"
 )
 
-fileprivate let sessionManager: SessionManager = {
-    let configuration = URLSessionConfiguration.default
-    configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
-    
-    return SessionManager(configuration: configuration)
-}()
-
 final class Esa {
     
-    class func authorize(completion: @escaping (Result<OAuthSwiftCredential, OAuthSwiftError>) -> Void) {
+    static let shared: Esa = {
+        let defaults = UserDefaults.standard
+        if let data = defaults.object(forKey: "esa-credential") as? Data,
+            let credential = NSKeyedUnarchiver.unarchiveObject(with: data) {
+            return Esa(token: (credential as! OAuthSwiftCredential).oauthToken)
+        } else {
+            return Esa()
+        }
+    }()
+    
+    convenience init(token: String) {
+        self.init()
+        sessionManager.adapter = AccessTokenAdapter(accessToken: token)
+    }
+    
+    fileprivate let sessionManager: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+        
+        return SessionManager(configuration: configuration)
+    }()
+    
+    func authorize(completion: @escaping (Result<OAuthSwiftCredential, OAuthSwiftError>) -> Void) {
         
         oauth.authorize(withCallbackURL: "esamenuapp://oauth-callback", scope: "read", state: "app-secret", parameters: [:], headers: nil,  success: { (credential: OAuthSwiftCredential, response: OAuthSwiftResponse?, params: Parameters) in
             debugPrint("credential = \(credential)")
-            sessionManager.adapter = AccessTokenAdapter(accessToken: credential.oauthToken)
+            self.sessionManager.adapter = AccessTokenAdapter(accessToken: credential.oauthToken)
             completion(.success(credential))
 
         }) { (error: OAuthSwiftError) in
@@ -99,15 +109,33 @@ final class Esa {
         }
     }
     
-    class func list(completion: @escaping (Result<[Team], NSError>) -> Void) {
-        sessionManager.request(Router.Teams).validate().responseArray(keyPath: "teams") { (response: DataResponse<[Team]>) in
-            
-            switch response.result {
-            case .success(let teams):
-                completion(.success(teams))
-            case .failure(_):
-                completion(.failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
-            }
+    func teams(completion: @escaping (Result<[Team], NSError>) -> Void) {
+        sessionManager
+            .request(Router.Teams)
+            .validate()
+            .responseArray(keyPath: "teams") { (response: DataResponse<[Team]>) in
+                
+                switch response.result {
+                case .success(let teams):
+                    completion(.success(teams))
+                case .failure(_):
+                    completion(.failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+                }
+        }
+    }
+    
+    func posts(page: Int, completion: @escaping (Result<FetchedEntries, NSError>) -> Void) {
+        sessionManager
+            .request(Router.Posts(page))
+            .validate()
+            .responseObject { (response: DataResponse<FetchedEntries>) in
+                
+                switch response.result {
+                case .success(let entries):
+                    completion(.success(entries))
+                case .failure(_):
+                    completion(.failure(NSError(domain: "jp.horimislime.cage.error", code: -1, userInfo: nil)))
+                }
         }
     }
 }

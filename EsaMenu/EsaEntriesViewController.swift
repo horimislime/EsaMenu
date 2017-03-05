@@ -9,7 +9,7 @@
 import Cocoa
 import DateTools
 
-class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class EsaEntriesViewController: NSViewController {
 
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var tableView: NSTableView!
@@ -23,7 +23,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     @IBOutlet weak var lastUpdateLabel: NSTextField!
     
-    @IBAction func settingsButtonTapped(sender: AnyObject) {
+    @IBAction func settingsButtonTapped(_ sender: AnyObject) {
         let menu = NSMenu(title: "settings")
         menu.insertItem(withTitle: "Sign out", action: #selector(signOutMenuTapped(sender:)), keyEquivalent: "", at: 0)
         menu.insertItem(withTitle: "Quit", action: #selector(quitMenuTapped(sender:)), keyEquivalent: "q", at: 1)
@@ -42,7 +42,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
         NSApplication.shared().terminate(sender)
     }
     
-    private var entries = FetchedEntries()
+    fileprivate var entries = FetchedEntries()
     private weak var timer: Timer?
     private weak var lastUpdateTimer: Timer?
     
@@ -132,10 +132,13 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     func reloadLastUpdatedLabel() {
         guard let date = lastUpdated else { return }
-        lastUpdateLabel.stringValue = "Last Updated: \(date.timeAgoSinceNow())"
+        lastUpdateLabel.stringValue = "Last Updated: \(date.timeAgoSinceNow()!)"
     }
+}
+
+extension EsaEntriesViewController: NSTableViewDelegate, NSTableViewDataSource {
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         
         if entries.count == 0 {
             return 0
@@ -146,7 +149,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        if row == (self.numberOfRowsInTableView(tableView: tableView) - 1) {
+        if row == (self.numberOfRows(in: tableView) - 1) {
             return 30
         }
         let cell = tableView.make(withIdentifier: "EsaEntryCellIdentifier", owner: self) as! EsaEntryCell
@@ -157,7 +160,7 @@ class EsaEntriesViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        if row == (self.numberOfRowsInTableView(tableView: tableView) - 1) {
+        if row == (numberOfRows(in: tableView) - 1) {
             let cell = tableView.make(withIdentifier: "EsaEntryLoadCellIdentifier", owner: self) as! EsaEntryLoadCell
             cell.progress.startAnimation(self)
             return cell

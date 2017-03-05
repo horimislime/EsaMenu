@@ -16,8 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     private let popover = NSPopover()
     private var monitor: EventMonitor? = nil
-
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    
+    func applicationDidFinishLaunching(_ notification: Notification) {
         
         statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
         guard let button = statusItem.button else { return }

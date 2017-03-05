@@ -13,9 +13,9 @@ import enum Result.Result
 
 class EntryAuthor: Mappable {
     
-    var name: String!
-    var screenName: String!
-    var iconUrlString: String!
+    var name: String = ""
+    var screenName: String = ""
+    var iconUrlString: String = ""
     
     var iconURL: NSURL {
         return NSURL(string: iconUrlString)!

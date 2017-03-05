@@ -27,8 +27,9 @@ final class TeamSelectionViewController: NSViewController, NSTableViewDelegate, 
         tableView.delegate = self
         tableView.dataSource = self
         tableView.focusRingType = .none
+        tableView.rowHeight = 62
         
-        Team.list { [weak self] result in
+        Esa.shared.teams { [weak self] result in
             guard let strongSelf = self else { return }
             switch result {
             case .success(let teams):
@@ -39,7 +40,7 @@ final class TeamSelectionViewController: NSViewController, NSTableViewDelegate, 
         }
     }
     
-    @IBAction func settingsButtonTapped(sender: NSButton) {
+    @IBAction func settingsButtonTapped(_ sender: NSButton) {
         let menu = NSMenu(title: "settings")
         menu.insertItem(withTitle: "Sign out", action: #selector(signOutMenuTapped(sender:)), keyEquivalent: "", at: 0)
         menu.insertItem(withTitle: "Quit", action: #selector(quitMenuTapped(sender:)), keyEquivalent: "q", at: 1)
@@ -56,13 +57,8 @@ final class TeamSelectionViewController: NSViewController, NSTableViewDelegate, 
         NSApplication.shared().terminate(sender)
     }
     
-    
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return teams.count
-    }
-    
-    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 62
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
