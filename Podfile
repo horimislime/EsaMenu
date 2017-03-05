@@ -5,11 +5,11 @@ target 'EsaMenu' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'Alamofire', '3.0.0'
-  pod 'ObjectMapper', '0.19'
-  pod 'AlamofireObjectMapper', '1.1.0'
+  pod 'Alamofire', '4.4.0'
+  pod 'ObjectMapper', '2.2.5'
+  pod 'AlamofireObjectMapper', '4.1.0'
   pod 'MTDates'
-  pod 'OAuthSwift'
+  pod 'OAuthSwift', '1.1.1'
   pod 'DateTools'
 
   target 'EsaMenuTests' do

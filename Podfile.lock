@@ -1,29 +1,29 @@
 PODS:
-  - Alamofire (3.0.0)
-  - AlamofireObjectMapper (1.1.0):
-    - Alamofire (~> 3.0.0)
-    - ObjectMapper (~> 0.19)
+  - Alamofire (4.4.0)
+  - AlamofireObjectMapper (4.1.0):
+    - Alamofire (~> 4.1)
+    - ObjectMapper (~> 2.0)
   - DateTools (1.7.0)
   - MTDates (1.0.3)
-  - OAuthSwift (0.6.0)
-  - ObjectMapper (0.19)
+  - OAuthSwift (1.1.1)
+  - ObjectMapper (2.2.5)
 
 DEPENDENCIES:
-  - Alamofire (= 3.0.0)
-  - AlamofireObjectMapper (= 1.1.0)
+  - Alamofire (= 4.4.0)
+  - AlamofireObjectMapper (= 4.1.0)
   - DateTools
   - MTDates
-  - OAuthSwift
-  - ObjectMapper (= 0.19)
+  - OAuthSwift (= 1.1.1)
+  - ObjectMapper (= 2.2.5)
 
 SPEC CHECKSUMS:
-  Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
-  AlamofireObjectMapper: e31eb96b6adf855bb1b7737ff47598c5f42eb61e
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   MTDates: c65affdfb7b34001c5c9e3fe0beac4b1b8334a58
-  OAuthSwift: 8895267fbd6437a52aea26541572a617c7a8c7c1
-  ObjectMapper: a88114e5df20f055da63029f25cbc01014847c91
+  OAuthSwift: 6e3a103b3e5639411769cc7e199ec7e14bd1547f
+  ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
 
-PODFILE CHECKSUM: 12e868324ed24700d88e56283eec8d140c14686d
+PODFILE CHECKSUM: c2007a26e933b10b0144a4fff1fed6d1b111ed7f
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1
